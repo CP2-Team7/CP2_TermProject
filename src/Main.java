@@ -3,7 +3,11 @@ public class Main {
         System.out.println("JunSu");
         System.out.println("Hello world!");
         System.out.println("test");
+
+        System.out.println("금소현");
+
         System.out.println("KSJ");
         System.out.println("김유진");
+
     }
 }
