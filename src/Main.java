@@ -1,7 +1,13 @@
 public class Main {
     public static void main(String[] args) {
+        System.out.println("JunSu");
         System.out.println("Hello world!");
         System.out.println("test");
-        System.out.println("±Ý¼ÒÇö");
+
+        System.out.println("ê¸ˆì†Œí˜„");
+
+        System.out.println("KSJ");
+        System.out.println("ê¹€ìœ ì§„");
+
     }
 }
