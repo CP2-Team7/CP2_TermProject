@@ -1,12 +1,26 @@
 package Class;
 
 public class Question {
-    String category;
-    String content;
-    String answer;
+    public String category;
+    public String content;
+    public String answer;
 
-    //getter / setter 메소드
-    public static void main(String[] args) {
+    public Question(String category, String content, String answer) {
+        this.category = category;
+        this.content = content;
+        this.answer = answer;
+    }
 
+    // Getter와 Setter 메서드
+    public String getCategory() {
+        return category;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getAnswer() {
+        return answer;
     }
 }
