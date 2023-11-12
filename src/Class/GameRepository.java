@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameRepository {
-    private final String[] questionNameList = {"capital", "connection", "fourletters"};
-    private final String[] questionList = {"questionsCapital", "questionsConnection", "questionsFourLetters"};
-    List<Question> questionsCapital; // 수도문제 리스트
-    List<Question> questionsConnection; // 이어말하기 문제 리스트
-    List<Question> questionsFourLetters; // 사자성어 문제 리스트
+    public static List<Question> questionsCapital; // 수도문제 리스트
+    public static List<Question> questionsConnection; // 이어말하기 문제 리스트
+    public static List<Question> questionsFourLetters; // 사자성어 문제 리스트
 
     public GameRepository() {
         questionsCapital = new ArrayList<>();
@@ -20,17 +18,18 @@ public class GameRepository {
     }
 
     public boolean setQuestion() {
-        System.out.println(questionNameList.toString() + "게임 문제 세팅을 시작합니다.");
-        for (String questionName : questionNameList) {
-            setQuestionList(questionName);
-            System.out.println(questionName + " 문제 세팅을 완료했습니다.");
+        System.out.println("게임 문제 세팅을 시작합니다.");
+        for(QuestionName questionName : QuestionName.values()) {
+            int size = setQuestionList(questionName);
+            System.out.printf("%s 문제 %d개 세팅을 완료했습니다.\n", questionName, size);
         }
         return true;
     }
 
-    private void setQuestionList(String questionName) {
+    private int setQuestionList(QuestionName questionName) {
         String path = System.getProperty("user.dir") + "/question/" + questionName + ".csv";
         BufferedReader br;
+        List<Question> list = new ArrayList<>();
 
         try {
             br = new BufferedReader(new FileReader(path));
@@ -39,19 +38,22 @@ public class GameRepository {
             while((line = br.readLine()) != null) {
                 String[] arr = line.split(",");
                 Question question = new Question(questionName, arr[0], arr[1]);
-                if(questionName.equals("capital")){
-                    questionsCapital.add(question);
-                }else if(questionName.equals("connection")) {
-                    questionsConnection.add(question);
-                }else if(questionName.equals("fourletters")) {
-                    questionsFourLetters.add(question);
+                if(questionName.equals(QuestionName.CAPITAL)){
+                    list = questionsCapital;
+                }else if(questionName.equals(QuestionName.CONNECTION)) {
+                    list = questionsConnection;
+                }else if(questionName.equals(QuestionName.FOURLETTERS)) {
+                    list = questionsFourLetters;
                 }
+                list.add(question);
             }
             br.close();
         }catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        return list.size();
     }
+
     // 각 분야별로 setting된 question item 출력 함수, test용도
     public void printAllQuestionItem() {
         System.out.println("-----------------------------------------------------------------------");
