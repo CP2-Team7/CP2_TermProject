@@ -52,7 +52,7 @@ public class GameRepository {
             System.out.println(e.getMessage());
         }
     }
-
+    // 각 분야별로 setting된 question item 출력 함수, test용도
     public void printAllQuestionItem() {
         System.out.println("-----------------------------------------------------------------------");
         System.out.println("수도 문제 리스트업");
