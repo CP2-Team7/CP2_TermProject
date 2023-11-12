@@ -1,9 +1,6 @@
 package Class;
 
-import Class.Question;
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,11 +13,17 @@ public class GameRepository {
     List<Question> questionsConnection; // 이어말하기 문제 리스트
     List<Question> questionsFourLetters; // 사자성어 문제 리스트
 
-    public boolean setQuestion() throws IOException {
+    public GameRepository() {
+        questionsCapital = new ArrayList<>();
+        questionsConnection = new ArrayList<>();
+        questionsFourLetters = new ArrayList<>();
+    }
+
+    public boolean setQuestion() {
         System.out.println(questionNameList.toString() + "게임 문제 세팅을 시작합니다.");
         for (String questionName : questionNameList) {
             setQuestionList(questionName);
-            System.out.println(questionName + "문제 세팅을 완료했습니다.");
+            System.out.println(questionName + " 문제 세팅을 완료했습니다.");
         }
         return true;
     }
@@ -48,6 +51,27 @@ public class GameRepository {
         }catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void printAllQuestionItem() {
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("수도 문제 리스트업");
+        for(int i = 0; i < questionsCapital.size(); i++) {
+            System.out.printf("#%d | %s | %s | %s\n", i+1, questionsCapital.get(i).category, questionsCapital.get(i).content, questionsCapital.get(i).answer );
+        }
+        System.out.println("-----------------------------------------------------------------------");
+
+        System.out.println("이어말하기 문제 리스트업");
+        for(int i = 0; i < questionsConnection.size(); i++) {
+            System.out.printf("#%d | %s | %s | %s\n", i+1, questionsConnection.get(i).category, questionsConnection.get(i).content, questionsConnection.get(i).answer );
+        }
+        System.out.println("-----------------------------------------------------------------------");
+
+        System.out.println("사자성어 문제 리스트업");
+        for(int i = 0; i < questionsFourLetters.size(); i++) {
+            System.out.printf("#%d | %s | %s | %s\n", i+1, questionsFourLetters.get(i).category, questionsFourLetters.get(i).content, questionsFourLetters.get(i).answer );
+        }
+        System.out.println("-----------------------------------------------------------------------");
     }
 
 }
