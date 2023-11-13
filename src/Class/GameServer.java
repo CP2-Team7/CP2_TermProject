@@ -3,9 +3,6 @@ import java.util.*;
 
 public class GameServer {
     List<User> users;
-    List<Question> questionsCapital;
-    List<Question> questionsConnection;
-    List<Question> questionsFourLetters;
     //implement rankings as linked instead of array
     List<User> rankingCapital; 
     void setRankingCaptial(List<User> set) {rankingCapital = set;}
@@ -19,62 +16,35 @@ public class GameServer {
 
     public void init() {
         users = new ArrayList<User>();
-        questionsCapital = new ArrayList<Question>();
-        questionsConnection = new ArrayList<Question>();
-        questionsFourLetters = new ArrayList<Question>();
         rankingCapital = new LinkedList<User>();
         rankingConnection = new LinkedList<User>();
         rankingFourLetters = new LinkedList<User>();
         //do the things where you read from files later
     }
 
-    public Question[] GetQuestionSet(String type) {
-        List<Question> origin;
-        switch(type) {
-            case "Capital" :
-                origin = questionsCapital;
-                break;
-            case "Connection" :
-                origin = questionsConnection;
-                break;
-            case "FourLetters" :
-                origin = questionsFourLetters;
-                break;
-            default : 
-                System.out.println("장비를 정지합니다");
-                break;
-        }
-
-        Random rand = new Random();
-        Set<Question> temp = new HashSet<Question>();
-        for(int i = 0; i < setSize;) {
-            if(temp.add(origin[rand.nextInt(origin.size())])) {
-                i++;
-            }
-        }
-
-        return temp.toArray();
-    }
-
-    void checkLeaderboard(int score, User user, String category) {
-        List<User> leaderboard;
+    void checkLeaderboard(int score, User user, QuestionName category) {
+        List<User> leaderboard = rankingCapital;
+        int type = 0;
         switch(category) {
-            case "Capital" :
+            case CAPITAL :
                 leaderboard = rankingCapital;
+                type = 0;
                 break;
-            case "Connection" :
+            case CONNECTION :
                 leaderboard = rankingConnection;
+                type = 1;
                 break;
-            case "FourLetters" :
+            case FOURLETTERS :
                 leaderboard = rankingFourLetters;
+                type = 2;
                 break;
             default : 
                 System.out.println("장비를 정지합니다");
                 break;
         }
 
-        for(int i; i < rankingSize; i++) {
-            if(score > leaderboard[i]) {
+        for(int i = 0; i < rankingSize; i++) {
+            if(score > leaderboard.get(i).score[type]) {
                 leaderboard.add(i, user);
                 leaderboard.remove(rankingSize);
                 break;
@@ -85,16 +55,16 @@ public class GameServer {
         //GameRepository.whateverthenameis
     }
 
-    void checkPersonalHigh(int score, User user, String category) {
-        int ogScore;
+    void checkPersonalHigh(int score, User user, QuestionName category) {
+        int ogScore = 0;
         switch(category) {
-            case "Capital" :
+            case CAPITAL :
                 ogScore = user.score[0];
                 break;
-            case "Connection" :
+            case CONNECTION :
                 ogScore = user.score[1];
                 break;
-            case "FourLetters" :
+            case FOURLETTERS :
                 ogScore = user.score[2];
                 break;
             default : 
@@ -105,20 +75,5 @@ public class GameServer {
         if(score > ogScore) {
             ogScore = score;
         }
-    }
-
-    boolean[] checkAnswer(List<Integer> answers, List<Question> questions) {
-        boolean[] ret = new boolean[setSize];
-
-        for(int i = 0; i < setSize; i++) {
-            if(answers.get(i) == questions.get(i).getAnswer) {
-                ret[i] = true;
-            }
-            else {
-                ret[i] = false;
-            }
-        }
-
-        return ret;
     }
 }
