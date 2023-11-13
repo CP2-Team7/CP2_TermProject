@@ -6,9 +6,9 @@ public class Question {
     public String answer;
 
     public Question(QuestionName category, String content, String answer) {
-    public QuestionName category;
-    public String content;
-    public String answer;
+        this.category = category;
+        this.content = content;
+        this.answer = answer;
     }
 
     // Getter와 Setter 메서드
