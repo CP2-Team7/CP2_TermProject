@@ -4,10 +4,10 @@ public class Main {
         System.out.println("Hello world!");
         System.out.println("test");
 
-        System.out.println("금소현");
+        System.out.println("湲덉냼�쁽");
 
         System.out.println("KSJ");
-        System.out.println("김유진");
+        System.out.println("源��쑀吏�");
 
     }
 }
