@@ -5,7 +5,7 @@ import java.util.*;
 public class GameRound {
     final int stepNumber = 10;
     QuestionName currentCategory;
-    User currentUser;   
+    User currentUser;
     List<Question> questionList;
     ArrayList<String> answerList;
     ArrayList<Integer> scoreList;
