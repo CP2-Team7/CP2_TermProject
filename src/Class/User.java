@@ -1,4 +1,5 @@
 package Class;
+
 public class User {
     public String name;
     public int[] score; // 0번 scoreCapital, 1번 scoreConnection, 2번 scoreFourLetters
