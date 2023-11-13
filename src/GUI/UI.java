@@ -4,22 +4,22 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Placehold extends JFrame {
+public class UI extends JFrame {
 	private JPanel startPanel, categoryPanel, qPanel, endPanel, rankingPanel, markingPanel;
 	private JTextField nametxt, qtxt, answertxt;
 	private JButton capitalb, connectionb, fourletterb, nextb1, nextb2, nextb3, backb, toRankingb, toFirstb, toMarkingb;
 	
-	public Placehold() {
-		setSize(300,400);
+	public UI() {
+		setSize(1200,800);
 		CardLayout card = new CardLayout(0,0);
-		setLayout(card);//ÇÁ·¹ÀÓ ¼³Á¤
+		setLayout(card);//í”„ë ˆì„ ì„¤ì •
 		
 		startPanel = new JPanel();
 		nametxt = new JTextField(10);
-		nextb1 = new JButton("´ÙÀ½");
+		nextb1 = new JButton("ë‹¤ìŒ");
 		JPanel s1 = new JPanel();
 		JPanel s2 = new JPanel();
-		s1.add(new JLabel("ÀÌ¸§: "));
+		s1.add(new JLabel("ì´ë¦„: "));
 		s1.add(nametxt);
 		s2.add(nextb1);
 		startPanel.setLayout(new BorderLayout());
@@ -28,7 +28,7 @@ public class Placehold extends JFrame {
 		add(startPanel);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		add(startPanel,"p1");//startÆĞ³Î ·¹ÀÌ¾Æ¿ô
+		add(startPanel,"p1");//startíŒ¨ë„ ë ˆì´ì•„ì›ƒ
 		
 		nextb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -40,11 +40,12 @@ public class Placehold extends JFrame {
 		JPanel c1 = new JPanel();
 		JPanel c2 = new JPanel();
 		JPanel c3 = new JPanel();
-		capitalb = new JButton();
-		connectionb = new JButton();
-		fourletterb = new JButton();
-		nextb2 = new JButton();
-		c1.add(new JLabel("< °ÔÀÓ Ä«Å×°í¸®¸¦ ¼±ÅÃÇÏ¼¼¿ä >"));
+		capitalb = new JButton("ìˆ˜ë„ ë§ì¶”ê¸°");
+		connectionb = new JButton("ì´ì–´ë§í•˜ê¸°");
+		fourletterb = new JButton("ì‚¬ìì„±ì–´");
+		nextb2 = new JButton("ë‹¤ìŒ");
+		categoryPanel.setLayout(new GridLayout(3,1));
+		c1.add(new JLabel("< ê²Œì„ ì¹´í…Œê³ ë¦¬ë¥¼ ì„ íƒí•˜ì„¸ìš” >"));
 		c2.add(capitalb);
 		c2.add(connectionb);
 		c2.add(fourletterb);
@@ -52,12 +53,12 @@ public class Placehold extends JFrame {
 		categoryPanel.add(c1);
 		categoryPanel.add(c2);
 		categoryPanel.add(c3);
-		add(categoryPanel,"p2");//Ä«Å×°í¸® ÆĞ³Î ·¹ÀÌ¾Æ¿ô
+		add(categoryPanel,"p2");//ì¹´í…Œê³ ë¦¬ íŒ¨ë„ ë ˆì´ì•„ì›ƒ
 		
 		
 	}
 	
 	public static void main(String arg[]) {
-		Placehold p = new Placehold();
+		UI p = new UI();
 	}
 }
