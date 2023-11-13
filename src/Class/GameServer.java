@@ -106,4 +106,19 @@ public class GameServer {
             ogScore = score;
         }
     }
+
+    boolean[] checkAnswer(List<Integer> answers, List<Question> questions) {
+        boolean[] ret = new boolean[setSize];
+
+        for(int i = 0; i < setSize; i++) {
+            if(answers.get(i) == questions.get(i).getAnswer) {
+                ret[i] = true;
+            }
+            else {
+                ret[i] = false;
+            }
+        }
+
+        return ret;
+    }
 }
