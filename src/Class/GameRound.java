@@ -60,4 +60,13 @@ public class GameRound {
         System.out.println("answerList : " + answerList.toString());
         System.out.println("scoreList : " + scoreList.toString());
     }
+
+    public boolean checkAnswer() {
+        for(int i = 0; i < stepNumber; i++) {
+            if(!answerList.get(i).equals(questionList.get(i).answer)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
