@@ -4,6 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import Class.QuestionName;
+import Class.User;
+
+import java.util.*;
+
 public class UI extends JFrame {
 	private JPanel mainPanel, startPanel, categoryPanel, qPanel, endPanel, rankingPanel, markingPanel;
 	private JTextField nametxt, qtxt, answertxt;
@@ -21,6 +26,7 @@ public class UI extends JFrame {
 		startPanel = new JPanel();
 		nametxt = new JTextField(20);
 		nextb1 = new JButton("다음");
+
 		JLabel namel = new JLabel("이름을 입력해 주세요.");
 		startPanel.setLayout(null);
 		namel.setBounds(400, 200, 800, 100);
@@ -48,6 +54,7 @@ public class UI extends JFrame {
 		connectionb = new JButton("이어말하기");
 		fourletterb = new JButton("사자성어");
 		nextb2 = new JButton("다음");
+
 		JLabel selectcatl = new JLabel("< 게임 카테고리를 선택하세요 >");
 		categoryPanel.setLayout(null);
 		selectcatl.setFont(new Font("PLAIN",Font.BOLD,35));
