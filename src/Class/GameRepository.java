@@ -54,6 +54,11 @@ public class GameRepository {
         return list.size();
     }
 
+    public void setUserRanking() {
+
+    }
+
+
     // 각 분야별로 setting된 question item 출력 함수, test용도
     public void printAllQuestionItem() {
         System.out.println("-----------------------------------------------------------------------");
