@@ -28,8 +28,4 @@ public class UI extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 설정
 	}
-	
-	public static void main(String arg[]) {
-		UI p = new UI();
-	}
 }
