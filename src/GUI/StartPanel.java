@@ -1,14 +1,12 @@
 package GUI;
 
-import java.awt.CardLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
+import Class.*;
+
 
 public class StartPanel extends JPanel {
 	JPanel panel;
