@@ -6,9 +6,9 @@ public class Main {
         GameRepository gameRepository = new GameRepository(); // DB
         gameRepository.printAllQuestionItem(); // 디버깅 용도
 
-        //GameServer gameServer = new GameServer(); // Server
-        //GameRound gameRound = new GameRound(); // Controller
+        GameServer gameServer = new GameServer(); // Server
+        GameRound gameRound = new GameRound(); // Controller
 
-        //UI ui = new UI();
+        UI ui = new UI();
     }
 }

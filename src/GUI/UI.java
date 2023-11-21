@@ -1,13 +1,8 @@
 package GUI;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
-import Class.QuestionName;
-import Class.User;
-
-import java.util.*;
 
 public class UI extends JFrame {
 	private JPanel mainPanel;
