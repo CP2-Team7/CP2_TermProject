@@ -10,9 +10,7 @@ import Class.User;
 import java.util.*;
 
 public class UI extends JFrame {
-	private JPanel mainPanel, startPanel, categoryPanel, qPanel, endPanel, rankingPanel, markingPanel;
-	private JTextField nametxt, qtxt, answertxt;
-	private JButton capitalb, connectionb, fourletterb, nextb1, nextb2, nextb3, backb, toRankingb, toFirstb, toMarkingb;
+	private JPanel mainPanel;
 	
 	public UI() {
 		setSize(1200,800);
