@@ -86,7 +86,7 @@ public class GameRepository {
                 }else if(questionName.equals(QuestionName.FOURLETTERS)) {
                     list = rankingFourLetters;
                 }
-                user.setScore(questionName.toString(), Integer.parseInt(arr[1]));
+                //user.setScore(questionName.toString(), Integer.parseInt(arr[1]));
                 list.add(user);
             }
             br.close();

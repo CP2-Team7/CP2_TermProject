@@ -10,10 +10,10 @@ import javax.swing.JPanel;
 public class CategoryPanel extends JPanel {{
     CardLayout card;
 
-    public CategoryPanel(CardLayout cl) {{
-        super();
-        card = cl;
-    }}
+    //public CategoryPanel(CardLayout cl) {{
+    //    super();
+    //    card = cl;
+    //}}
 
     JButton capitalb = new JButton("수도 맞추기");
     JButton connectionb = new JButton("이어말하기");
