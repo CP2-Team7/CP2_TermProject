@@ -18,6 +18,11 @@ public class GameRepository {
         questionsCapital = new ArrayList<>();
         questionsConnection = new ArrayList<>();
         questionsFourLetters = new ArrayList<>();
+        rankingCapital = new ArrayList<>();
+        rankingConnection = new ArrayList<>();
+        rankingFourLetters = new ArrayList<>();
+        this.setQuestion();
+        this.setUserRanking();
     }
 
     public boolean setQuestion() {
@@ -31,6 +36,7 @@ public class GameRepository {
 
     private int setQuestionList(QuestionName questionName) {
         String path = System.getProperty("user.dir") + "/question/" + questionName + ".csv";
+        System.out.println(path);
         BufferedReader br;
         List<Question> list = new ArrayList<>();
 
@@ -76,8 +82,7 @@ public class GameRepository {
             br.readLine();
             while((line = br.readLine()) != null) {
                 String[] arr = line.split(",");
-//                Question question = new Question(questionName, arr[0], arr[1]);
-                User user = new User(arr[0]);
+                User user = new User(arr[1]);
 
                 if(questionName.equals(QuestionName.CAPITAL)){
                     list = rankingCapital;
@@ -86,7 +91,7 @@ public class GameRepository {
                 }else if(questionName.equals(QuestionName.FOURLETTERS)) {
                     list = rankingFourLetters;
                 }
-                user.setScore(questionName.toString(), Integer.parseInt(arr[1]));
+                user.setScore(questionName, Integer.parseInt(arr[2]));
                 list.add(user);
             }
             br.close();
@@ -116,6 +121,27 @@ public class GameRepository {
         for(int i = 0; i < questionsFourLetters.size(); i++) {
             System.out.printf("#%d | %s | %s | %s\n", i+1, questionsFourLetters.get(i).category, questionsFourLetters.get(i).content, questionsFourLetters.get(i).answer );
         }
+        System.out.println("-----------------------------------------------------------------------");
+
+        System.out.println("capital 카테고리 user ranking 리스트업");
+        for(User user : rankingCapital) {
+            System.out.printf("%s %s | ", user.name, user.score[0]);
+        }
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------");
+
+        System.out.println("connection 카테고리 user ranking 리스트업");
+        for(User user : rankingConnection) {
+            System.out.printf("%s %s | ", user.name, user.score[1]);
+        }
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------");
+
+        System.out.println("fourletters 카테고리 user ranking 리스트업");
+        for(User user : rankingFourLetters) {
+            System.out.printf("%s %s | ", user.name, user.score[2]);
+        }
+        System.out.println();
         System.out.println("-----------------------------------------------------------------------");
     }
 
