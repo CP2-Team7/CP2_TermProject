@@ -13,7 +13,6 @@ public class UI extends JFrame {
 		setSize(1200,800);
 		CardLayout card = new CardLayout(0,0);
 		mainPanel = new JPanel(card);
-		CardLayout cl = (CardLayout)mainPanel.getLayout();
 		add(mainPanel);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 설정
@@ -32,14 +31,13 @@ public class UI extends JFrame {
 		startPanel.add(namel);
 		startPanel.add(nametxt);
 		startPanel.add(nextb1);
-		//add(startPanel);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mainPanel.add(startPanel,"p1");//start패널 레이아웃
 		nextb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(nametxt.getText());
-				cl.next(mainPanel);
+				card.next(mainPanel);
 			}
 		});//nextb1이벤트처리
 		
@@ -68,7 +66,7 @@ public class UI extends JFrame {
 		mainPanel.add(categoryPanel,"p2");//카테고리 패널 레이아웃
 		nextb2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cl.next(mainPanel);
+				card.next(mainPanel);
 			}
 		});//nextb2이벤트처리
 		
@@ -94,7 +92,7 @@ public class UI extends JFrame {
 		mainPanel.add(endPanel,"p4");//endPanel 레이아웃
 		toFirstb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cl.first(mainPanel);
+				card.first(mainPanel);
 			}
 		});//처음화면으로 버튼 이벤트 처리
 	}
