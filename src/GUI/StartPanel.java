@@ -31,6 +31,7 @@ public class StartPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CardLayout card = (CardLayout)panel.getLayout();
+                User user = new User(nametxt.getText());
                 card.next(panel);
             }
 		});
