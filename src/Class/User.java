@@ -17,12 +17,12 @@ public class User {
         return score;
     }
 
-    public void setScore(String category, int value) {//value 총 점수
-        if ("수도문제".equals(category)) {
+    public void setScore(QuestionName category, int value) {//value 총 점수
+        if (category.equals(QuestionName.CAPITAL)) {
             score[0] = value;
-        } else if ("이어말하기문제".equals(category)) {
+        } else if (category.equals(QuestionName.CONNECTION)) {
             score[1] = value;
-        } else if ("사자성어문제".equals(category)) {
+        } else if (category.equals(QuestionName.FOURLETTERS)) {
             score[2] = value;
         } else {
             throw new IllegalArgumentException("유효하지 않은 카테고리입니다.");

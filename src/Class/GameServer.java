@@ -16,9 +16,9 @@ public class GameServer {
 
     public void init() {
         users = new ArrayList<User>();
-        rankingCapital = new LinkedList<User>();
-        rankingConnection = new LinkedList<User>();
-        rankingFourLetters = new LinkedList<User>();
+        rankingCapital = GameRepository.rankingCapital;
+        rankingConnection = GameRepository.rankingConnection;
+        rankingFourLetters = GameRepository.rankingFourLetters;
         //do the things where you read from files later
     }
 

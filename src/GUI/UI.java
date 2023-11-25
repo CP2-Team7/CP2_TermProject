@@ -1,13 +1,11 @@
 package GUI;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
+
 public class UI extends JFrame {
-	private JPanel mainPanel, startPanel, categoryPanel, qPanel, endPanel, rankingPanel, markingPanel;
-	private JTextField nametxt, qtxt, answertxt;
-	private JButton capitalb, connectionb, fourletterb, nextb1, nextb2, nextb3, backb, toRankingb, toFirstb, toMarkingb;
+	private JPanel mainPanel;
 	
 	public UI() {
 		setSize(1200,800);
@@ -15,8 +13,8 @@ public class UI extends JFrame {
 		mainPanel = new JPanel(card);
 		add(mainPanel);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 설정
 		
+<<<<<<< HEAD
 		startPanel = new JPanel();
 		nametxt = new JTextField(20);
 		nextb1 = new JButton("다음");
@@ -99,5 +97,15 @@ public class UI extends JFrame {
 	
 	public static void main(String arg[]) {
 		UI p = new UI();
+=======
+		mainPanel.add(new StartPanel(mainPanel),"p1");//start패널 레이아웃
+		mainPanel.add(new CategoryPanel(mainPanel),"p2");//카테고리 패널 레이아웃
+		mainPanel.add(new EndPanel(mainPanel), "p3");
+		mainPanel.add(new RankingPanel(mainPanel),"p4");//endPanel 레이아웃
+
+
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 설정
+>>>>>>> f5bc15b94d6794818fd824727ea18b7d656f728b
 	}
 }
