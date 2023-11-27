@@ -5,14 +5,14 @@ import java.util.*;
 public class GameRound {
     static final int stepNumber = 10;
     final int scoreRate = 10;
-    static QuestionName currentCategory;
-    static User currentUser;
-    static List<Question> questionList;
-    static ArrayList<String> answerList;
-    static ArrayList<Integer> scoreList;
+    QuestionName currentCategory;
+    User currentUser;
+    List<Question> questionList;
+    ArrayList<String> answerList;
+    ArrayList<Integer> scoreList;
 
 
-    public static void initGameRound(QuestionName cG, User cU) {
+    public void initGameRound(QuestionName cG, User cU) {
         currentCategory = cG;
         currentUser = cU;
         questionList = new ArrayList<>();
@@ -21,17 +21,17 @@ public class GameRound {
         setQuestionListRandom(currentCategory);
     }
 
-    public static List<Question> getQuestionList() {
+    public List<Question> getQuestionList() {
         return questionList;
     }
-    public static ArrayList<String> getAnswerList() {
+    public ArrayList<String> getAnswerList() {
         return answerList;
     }
-    public static ArrayList<Integer> getScoreList() {
+    public ArrayList<Integer> getScoreList() {
         return scoreList;
     }
 
-    private static void setQuestionListRandom(QuestionName currentCategory) {
+    private void setQuestionListRandom(QuestionName currentCategory) {
         List<Question> list = new ArrayList<>();
         if (currentCategory.equals(QuestionName.CAPITAL)) {
             list = GameRepository.questionsCapital;
@@ -68,7 +68,7 @@ public class GameRound {
     }
 
     // 중복 없이 범위 내에서 난수 생성
-    private static Integer[] setRandomNumber(int count, int listSize) {
+    private Integer[] setRandomNumber(int count, int listSize) {
         Set<Integer> set = new HashSet<>();
         while (set.size() < count) {
             Double d = Math.random() * (listSize-1) + 0;
@@ -79,7 +79,7 @@ public class GameRound {
         return randomNumbers;
     }
 
-    public static void printAllItem() {
+    public void printAllItem() {
         System.out.println("currentCategory : " + currentCategory);
         System.out.println("currentUser : " + currentUser.name + currentUser.score);
         System.out.println("questionList : ");
