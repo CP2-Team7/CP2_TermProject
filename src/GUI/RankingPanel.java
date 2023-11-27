@@ -29,6 +29,7 @@ public class RankingPanel extends JPanel {
         gameServer.checkLeaderboard(gameRound.checkAnswer(gameRound.answerList), gameRound.currentuser);
 
         //test
+        //
         java.util.List<User> testRanking = new ArrayList<User>();
         testRanking.add(new User("a"));
         testRanking.add(new User("b"));
