@@ -2,25 +2,21 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+import java.awt.event.*;
+import java.util.*;
 import Class.*;
+
+import static Class.QuestionName.CAPITAL;
 
 public class Submit extends JFrame {
     JPanel mainPanel, questionPanel, bottomPanel;
     JTextField answer;
     JTextArea questionArea;
-    String questionContent;
-    ArrayList<String> userAnswers;
-    GameRound gameRound;
+    ArrayList<Question> questionList;
+    int currentQuestionIndex;
+    ArrayList<String> userAnswers = new ArrayList<>();
 
     public Submit() {
-        // 문제 아직 불러오지 않아 임의로 설정
-        questionContent = "\n" + "일본의 수도는?";
-
         setTitle("QUIZZ ME!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 800);
@@ -34,7 +30,6 @@ public class Submit extends JFrame {
         questionPanel = new JPanel(new BorderLayout());
         questionArea = new JTextArea("Question", 30, 100);
         questionArea.setEnabled(false);
-        questionArea.append(questionContent);
         questionArea.setFont(new Font("", 0, 50));
 
         questionArea.setEditable(false);
@@ -45,10 +40,8 @@ public class Submit extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    // Enter 키를 누르면 다음 버튼 누른 것과 동일한 효과
-                    System.out.println("입력 값: " + answer.getText());
-                    answer.setText("");
-                    startQuiz();
+                    System.out.println("입력 값:" + answer.getText());
+                    showNextQuestion();
                 }
             }
         });
@@ -64,43 +57,52 @@ public class Submit extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 다음 버튼을 누를 때 answer의 값을 터미널에 출력
-                System.out.println("입력한 값: " + answer.getText());
-                answer.setText("");
-                startQuiz();
+                System.out.println("입력 값:" + answer.getText());
+                showNextQuestion();
             }
         });
         bottomPanel.add(nextButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
+        //dummy 데이터 설정
+        setDummyData();
+
+        currentQuestionIndex = 0;
+        showNextQuestion();
 
         setVisible(true);
     }
 
-    private void startQuiz() {
-        //GameRound에서 문제 리스트 불러와야함
-        ArrayList<Question> questionList = new ArrayList<>();
-
-        // Iterate through the questions
-        for (Question question : questionList) {
-            questionArea.setText(question.getContent());
-
-
-            answer.requestFocus(); //텍스트 필드에 포커스
-            answer.setText(""); // 이전 답 지우기
-            answer.setEditable(true); //
-
-            String userAnswer = answer.getText();
-            userAnswers.add(userAnswer);
-
-            System.out.println("유저 답: " + userAnswer);
-
-            answer.setText("");
+    public void setDummyData() {
+        QuestionName ca = CAPITAL;
+        String[] dummyQ = new String[]{"인도네시아의 수도는?", "중국의 수도는?", "인도의 수도는?", "요르단의 수도는?", "말레이시아의 수도는?"
+                , "필리핀의 수도는?", "이스라엘의 수도는?", "라오스의 수도는?", "러시아의 수도는?", "오스트리아의 수도는?"};
+        String[] dummyA = {"자카르타", "베이징", "뉴델리", "암만", "쿠알라룸푸르", "마닐라", "예루살렘", "비엔티안", "모스크바", "비엔나"};
+        questionList = new ArrayList<>();
+        for(int i = 0; i < dummyQ.length; i++){
+            String c = dummyQ[i];
+            String a = dummyA[i];
+            Question q = new Question(ca, c, a);
+            questionList.add(q);
         }
+    }
+    public void showNextQuestion() {
+        if (currentQuestionIndex < questionList.size()) {
+            questionArea.setText(questionList.get(currentQuestionIndex).getContent());
 
-        int totalScore = gameRound.checkAnswer(userAnswers);
-        System.out.println("총 점수: " + totalScore);
+            userAnswers.add(answer.getText());
+
+            currentQuestionIndex++;
+
+            answer.setText(""); // 이전 답 초기화
+            answer.requestFocus(); // 텍스트 필드에 포커스
+        } else {
+            // 모든 문제를 풀었을 때
+            answer.setText("");
+            answer.setEnabled(false);
+
+        }
     }
 
 
