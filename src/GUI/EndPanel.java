@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 
 
 public class EndPanel extends JPanel {
-	JPanel panel;
+	JPanel panel, mainPanel;
 
-	EndPanel(JPanel cl) {
+	public EndPanel(JPanel cl) {
 		super();
 		panel =  cl;
 		
@@ -47,7 +47,7 @@ public class EndPanel extends JPanel {
 		add(toRankingb);
 		add(toMarkingb);
 		add(toFirstb);
-		toFirstb.addActionListener(new ActionListener() {
+		toMarkingb.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CardLayout card = (CardLayout)panel.getLayout();

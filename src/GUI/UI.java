@@ -26,7 +26,6 @@ public class UI extends JFrame {
 		mainPanel.add(new RankingPanel(mainPanel),"p5");
 		mainPanel.add(new CheckAnswerPage(), "p6");
 
-
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 설정
 	}

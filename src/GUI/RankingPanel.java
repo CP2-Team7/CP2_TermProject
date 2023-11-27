@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.CardLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
