@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class UI extends JFrame {
 	private JPanel mainPanel;
-	
+
 	public UI() {
 		setSize(1200,800);
 		CardLayout card = new CardLayout(0,0);
