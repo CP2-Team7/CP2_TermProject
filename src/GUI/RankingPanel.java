@@ -1,13 +1,14 @@
 package GUI;
 
-import java.awt.CardLayout;
 import java.util.ArrayList;
 
-import javax.smartcardio.Card;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import Class.GameRepository;
+import Class.GameRound;
+import Class.GameServer;
 import Class.QuestionName;
 import Class.User;
 
@@ -21,8 +22,13 @@ public class RankingPanel extends JPanel {
         JTextArea rankings = new JTextArea(9, 20);
         rankings.setEditable(false);
         rankings.append("리더보드\n");
+        GameRound gameRound;
+        GameServer gameServer;
+
+        gameServer.checkLeaderboard(gameRound.checkAnswer(gameRound.answerList), gameRound.currentuser);
 
         //test
+        //
         java.util.List<User> testRanking = new ArrayList<User>();
         testRanking.add(new User("a"));
         testRanking.add(new User("b"));
