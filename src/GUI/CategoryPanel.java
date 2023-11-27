@@ -22,7 +22,7 @@ public class CategoryPanel extends JPanel {
 
     CategoryPanel(UI ui) {
         super();
-        panel = pn;
+        panel = ui.mainPanel;
         JButton capitalb = new JButton("수도 맞추기");
         JButton connectionb = new JButton("이어말하기");
         JButton fourletterb = new JButton("사자성어");
@@ -74,8 +74,8 @@ public class CategoryPanel extends JPanel {
         			capitalb.setBackground(yellow);
                 	GameRound gr = new GameRound();
                 	QuestionName qn = QuestionName.valueOf(setcategory);
-                	System.out.println(setcategory); //startpanel에서 만든 user 참조 문제로 프린트로 대체
-                	//gr.initGameRound(qn, user.getName());
+                	
+                	
                 	setcategory="none";
                 }
             }

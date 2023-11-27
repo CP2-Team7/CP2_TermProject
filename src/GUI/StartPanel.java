@@ -13,7 +13,7 @@ public class StartPanel extends JPanel {
 
 	StartPanel(UI ui) {
 		super();
-		panel = pn;
+		panel = ui.mainPanel;
 		Color blue = new Color(0x393E64);
         Color yellow = new Color(0xF1C832);
 		setBackground(blue);
@@ -35,7 +35,7 @@ public class StartPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CardLayout card = (CardLayout)panel.getLayout();
-                User user = new User(nametxt.getText()); //입력받은 닉네임으로 User 클래스 user생성
+                ui.user.setName(nametxt.getText()); //입력받은 닉네임으로 User 클래스 user생성
                 card.next(panel);
             }
 		});
