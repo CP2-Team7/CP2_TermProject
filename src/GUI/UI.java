@@ -13,7 +13,7 @@ public class UI extends JFrame {
 		mainPanel = new JPanel(card);
 		add(mainPanel);
 		setResizable(false);
-		
+
 		mainPanel.add(new StartPanel(mainPanel),"p1");//start패널 레이아웃
 		mainPanel.add(new CategoryPanel(mainPanel),"p2");//카테고리 패널 레이아웃
 		mainPanel.add(new EndPanel(mainPanel), "p3");
