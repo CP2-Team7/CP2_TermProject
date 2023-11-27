@@ -6,5 +6,6 @@ public class Main {
         GameRepository gameRepository = new GameRepository(); // DB
 
         UI ui = new UI();
+        RankingPanel r = new RankingPanel(ui);
     }
 }
