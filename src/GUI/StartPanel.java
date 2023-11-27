@@ -14,6 +14,9 @@ public class StartPanel extends JPanel {
 	StartPanel(JPanel pn) {
 		super();
 		panel = pn;
+		Color blue = new Color(0x393E64);
+        Color yellow = new Color(0xF1C832);
+		setBackground(blue);
 		JTextField nametxt = new JTextField(20);
 		JButton nextb1 = new JButton("다음");
 		JLabel namel = new JLabel("이름을 입력해 주세요.");
@@ -21,9 +24,10 @@ public class StartPanel extends JPanel {
 		namel.setBounds(400, 200, 800, 100);
 		namel.setFont(new Font("PLAIN",Font.BOLD,35));
 		nextb1.setFont(new Font("PLAIN",Font.ITALIC,25));
-		nametxt.setFont(new Font("PLAIN",Font.ITALIC,25));
+		nametxt.setFont(new Font("PLAIN",Font.ITALIC,40));
 		nametxt.setBounds(250, 300, 700, 100);
 		nextb1.setBounds(450, 500, 300, 100);
+		namel.setForeground(Color.WHITE);
 		add(namel);
 		add(nametxt);
 		add(nextb1);
@@ -31,7 +35,7 @@ public class StartPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CardLayout card = (CardLayout)panel.getLayout();
-                User user = new User(nametxt.getText());
+                User user = new User(nametxt.getText()); //입력받은 닉네임으로 User 클래스 user생성
                 card.next(panel);
             }
 		});
