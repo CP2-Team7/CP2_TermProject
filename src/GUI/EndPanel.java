@@ -16,7 +16,7 @@ public class EndPanel extends JPanel {
 
 	public EndPanel(UI ui) {
 		super();
-		panel =  cl;
+		panel =  ui.mainPanel;
 		
 		Color blue = new Color(0x393E64);
         Color yellow = new Color(0xF1C832);

@@ -22,7 +22,7 @@ public class CheckAnswerPage extends JPanel {
     List<Integer> scoreList = new ArrayList<>(List.of(0, 0, 1, 1, 0, 1, 1, 0, 1, 1));
 
     public CheckAnswerPage(UI ui) {
-        panel = jp;
+        panel = ui.mainPanel;
 //        question = GameRound.getQuestionList();
 //        correctAnswer = GameRound.getAnswerList();
         //scoreList = GameRound.getScoreList();
