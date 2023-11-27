@@ -2,19 +2,19 @@ package Class;
 import java.util.*;
 
 public class GameServer {
-    static List<User> users;
+    List<User> users;
     //implement rankings as linked instead of array
-    static List<User> rankingCapital; 
+    List<User> rankingCapital; 
     void setRankingCaptial(List<User> set) {rankingCapital = set;}
-    static List<User> rankingConnection;
+    List<User> rankingConnection;
     void setRankingConnection(List<User> set) {rankingConnection = set;}
-    static List<User> rankingFourLetters;
+    List<User> rankingFourLetters;
     void setRankingFourLetters(List<User> set) {rankingFourLetters = set;}
 
-    static final int setSize = 10;
-    static final int rankingSize = 10;
+    final int setSize = 10;
+    final int rankingSize = 10;
 
-    static public void init() {
+    public GameServer() {
         users = new ArrayList<User>();
         rankingCapital = GameRepository.rankingCapital;
         rankingConnection = GameRepository.rankingConnection;
@@ -22,7 +22,7 @@ public class GameServer {
         //do the things where you read from files later
     }
 
-    static void checkLeaderboard(int score, User user, QuestionName category) {
+    void checkLeaderboard(int score, User user, QuestionName category) {
         List<User> leaderboard = rankingCapital;
         int type = 0;
         switch(category) {
@@ -55,7 +55,7 @@ public class GameServer {
         //GameRepository.whateverthenameis
     }
 
-    static void checkPersonalHigh(int score, User user, QuestionName category) {
+    void checkPersonalHigh(int score, User user, QuestionName category) {
         int ogScore = 0;
         switch(category) {
             case CAPITAL :
