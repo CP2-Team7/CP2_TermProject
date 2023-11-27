@@ -76,7 +76,7 @@ public class Submit extends JFrame {
 
     public void setDummyData() {
         QuestionName ca = CAPITAL;
-        String[] dummyQ = new String[]{"인도네시아의 수도는?", "중국의 수도는?", "인도의 수도는?", "요르단의 수도는?", "말레이시아의 수도는?"
+        String[] dummyQ = {"인도네시아의 수도는?", "중국의 수도는?", "인도의 수도는?", "요르단의 수도는?", "말레이시아의 수도는?"
                 , "필리핀의 수도는?", "이스라엘의 수도는?", "라오스의 수도는?", "러시아의 수도는?", "오스트리아의 수도는?"};
         String[] dummyA = {"자카르타", "베이징", "뉴델리", "암만", "쿠알라룸푸르", "마닐라", "예루살렘", "비엔티안", "모스크바", "비엔나"};
         questionList = new ArrayList<>();
