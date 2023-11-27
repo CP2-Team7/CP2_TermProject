@@ -11,11 +11,6 @@ public class Main {
         GameServer gameServer = new GameServer(); // Server
         GameRound gameRound = new GameRound(); // Controller
 
-        // 테스트
-        User user = new User("yujin");
-        gameRound.initGameRound(QuestionName.CAPITAL, user);
-        gameRound.printAllItem();
-
         UI ui = new UI();
     }
 }
