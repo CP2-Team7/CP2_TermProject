@@ -8,16 +8,19 @@ import Class.GameServer;
 
 
 public class UI extends JFrame {
-	private JPanel mainPanel;
+	public JPanel mainPanel;
+	public GameServer gameServer; // Server
+	public GameRound gameRound; // Controller
 
 	public UI() {
+		gameServer = new GameServer(); // Server
+		gameRound = new GameRound(); // Controller
+
 		setSize(1200,800);
 		CardLayout card = new CardLayout(0,0);
 		mainPanel = new JPanel(card);
 		add(mainPanel);
 		setResizable(false);
-        GameServer gameServer = new GameServer(); // Server
-        GameRound gameRound = new GameRound(); // Controller
 
 		mainPanel.add(new StartPanel(mainPanel),"p1");//start패널 레이아웃
 		mainPanel.add(new CategoryPanel(mainPanel),"p2");//카테고리 패널 레이아웃
