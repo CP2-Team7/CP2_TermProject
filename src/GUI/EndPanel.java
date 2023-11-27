@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class EndPanel extends JPanel {
 	JPanel panel, mainPanel;
 
-	public EndPanel(JPanel cl) {
+	public EndPanel(UI ui) {
 		super();
 		panel =  cl;
 		

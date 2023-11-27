@@ -20,7 +20,7 @@ public class CategoryPanel extends JPanel {
     JPanel panel;
     String setcategory="none";
 
-    CategoryPanel(JPanel pn) {
+    CategoryPanel(UI ui) {
         super();
         panel = pn;
         JButton capitalb = new JButton("수도 맞추기");
