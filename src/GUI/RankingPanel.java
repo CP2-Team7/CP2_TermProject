@@ -3,7 +3,6 @@ package GUI;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 
-import javax.smartcardio.Card;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
