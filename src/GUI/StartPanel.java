@@ -11,7 +11,7 @@ import Class.*;
 public class StartPanel extends JPanel {
 	JPanel panel;
 
-	StartPanel(JPanel pn) {
+	StartPanel(UI ui) {
 		super();
 		panel = pn;
 		Color blue = new Color(0x393E64);

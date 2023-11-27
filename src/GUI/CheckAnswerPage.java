@@ -21,7 +21,7 @@ public class CheckAnswerPage extends JPanel {
     List<String> correctAnswer = new ArrayList<>(List.of("빅토리아", "베이징", "비엔티안", "예루살렘", "몰라", "쿠알라룸푸트", "암만", "몰라", "모스크바", "로마"));
     List<Integer> scoreList = new ArrayList<>(List.of(0, 0, 1, 1, 0, 1, 1, 0, 1, 1));
 
-    public CheckAnswerPage(JPanel jp) {
+    public CheckAnswerPage(UI ui) {
         panel = jp;
 //        question = GameRound.getQuestionList();
 //        correctAnswer = GameRound.getAnswerList();
