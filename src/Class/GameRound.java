@@ -5,11 +5,11 @@ import java.util.*;
 public class GameRound {
     static final int stepNumber = 10;
     final int scoreRate = 10;
-    QuestionName currentCategory;
-    User currentUser;
-    List<Question> questionList;
-    ArrayList<String> answerList;
-    ArrayList<Integer> scoreList;
+    public QuestionName currentCategory;
+    public User currentUser;
+    public List<Question> questionList;
+    public ArrayList<String> answerList;
+    public ArrayList<Integer> scoreList;
 
 
     public void initGameRound(QuestionName cG, User cU) {

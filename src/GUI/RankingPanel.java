@@ -15,7 +15,7 @@ import Class.User;
 public class RankingPanel extends JPanel {
     JPanel panel;
 
-    RankingPanel(JPanel cl) {
+    RankingPanel(UI ui) {
         super();
         panel = cl;
         setLayout(null);

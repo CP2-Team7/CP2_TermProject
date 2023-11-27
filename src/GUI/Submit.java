@@ -16,7 +16,7 @@ public class Submit extends JFrame {
     int currentQuestionIndex;
     ArrayList<String> userAnswers = new ArrayList<>();
 
-    public Submit() {
+    public Submit(UI ui) {
         setTitle("QUIZZ ME!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 800);
