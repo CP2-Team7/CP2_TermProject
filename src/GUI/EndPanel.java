@@ -35,7 +35,10 @@ public class EndPanel extends JPanel {
 		toMarkingb.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new CheckAnswerPage();
+//				CardLayout card = new CardLayout(0,0);
+//				mainPanel = new JPanel(card);
+//				add(mainPanel);
+//				mainPanel.add(new CheckAnswerPage(mainPanel));
 			}
 		});
 	}
