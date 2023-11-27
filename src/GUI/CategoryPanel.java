@@ -67,7 +67,7 @@ public class CategoryPanel extends JPanel {
                 	selectcatl.setForeground(Color.RED);
                 }
                 else {
-                	card.next(panel);
+                	card.show(panel, "p3");
                 	selectcatl.setForeground(Color.WHITE);
                 	fourletterb.setBackground(yellow);
         			connectionb.setBackground(yellow);
