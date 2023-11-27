@@ -6,14 +6,14 @@ import javax.swing.*;
 
 public class UI extends JFrame {
 	private JPanel mainPanel;
-	
+
 	public UI() {
 		setSize(1200,800);
 		CardLayout card = new CardLayout(0,0);
 		mainPanel = new JPanel(card);
 		add(mainPanel);
 		setResizable(false);
-		
+
 		mainPanel.add(new StartPanel(mainPanel),"p1");//start패널 레이아웃
 		mainPanel.add(new CategoryPanel(mainPanel),"p2");//카테고리 패널 레이아웃
 		mainPanel.add(new EndPanel(mainPanel), "p3");
