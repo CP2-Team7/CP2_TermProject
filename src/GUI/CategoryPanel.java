@@ -17,11 +17,6 @@ import Class.QuestionName;
 
 public class CategoryPanel extends JPanel {
 
-    public CategoryPanel(CardLayout cl) {{
-        super();
-        card = cl;
-    }}
-
     JPanel panel;
     String setcategory="none";
 

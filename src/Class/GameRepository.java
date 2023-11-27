@@ -107,7 +107,7 @@ public class GameRepository {
 
 
     // 각 분야별로 setting된 question item 출력 함수, test용도
-    public void printAllQuestionItem() {
+    public static void printAllQuestionItem() {
         System.out.println("-----------------------------------------------------------------------");
         System.out.println("수도 문제 리스트업");
         for(int i = 0; i < questionsCapital.size(); i++) {

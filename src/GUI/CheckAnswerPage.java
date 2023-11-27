@@ -1,5 +1,8 @@
 package GUI;
 
+import Class.*;
+import GUI.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,10 +10,10 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
-public class CheckAnswerPage extends JFrame {
+public class CheckAnswerPage extends JPanel {
 
     private final int questionNumber = 10;
-    private JPanel CheckAnswerPanel, buttonPanel;
+    private JPanel CheckAnswerPanel, buttonPanel, panel;
 
     // dummy data
     List<String> question = new ArrayList<>(List.of("중국의 수도는?", "인도의 수도는?", "라오스의 수도는?", "이스라엘의 수도는?", "필리핀의 수도는?", "말레이시아의 수도는?", "요르단의 수도는?", "오스트리아의 수도는?", "러시아의 수도는?", "이탈리아의 수도는?"));
@@ -18,10 +21,16 @@ public class CheckAnswerPage extends JFrame {
     List<String> correctAnswer = new ArrayList<>(List.of("빅토리아", "베이징", "비엔티안", "예루살렘", "몰라", "쿠알라룸푸트", "암만", "몰라", "모스크바", "로마"));
     List<Integer> scoreList = new ArrayList<>(List.of(0, 0, 1, 1, 0, 1, 1, 0, 1, 1));
 
-    public CheckAnswerPage() {
-        setSize(1200, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("정답 확인");
+    public CheckAnswerPage(JPanel jp) {
+        panel = jp;
+//        question = GameRound.getQuestionList();
+//        correctAnswer = GameRound.getAnswerList();
+        //scoreList = GameRound.getScoreList();
+
+
+        //setSize(1200, 800);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setTitle("정답 확인");
         setLayout(new BorderLayout());
 
         CheckAnswerPanel = new CheckAnswerPanel();
@@ -32,6 +41,7 @@ public class CheckAnswerPage extends JFrame {
 
         setVisible(true);
     }
+
     class CheckAnswerPanel extends JPanel {
         private JLabel questionTitle, userAnswerTitle, correctAnswerTitle;
         private JLabel questionLabel, userAnswerLabel, correctAnswerLabel;
@@ -50,7 +60,6 @@ public class CheckAnswerPage extends JFrame {
 
             for(int i = 0; i < questionNumber; i++) {
                 questionLabel = new JLabel(question.get(i));
-                ;
                 userAnswerLabel = new JLabel(userAnswer.get(i));
                 correctAnswerLabel = new JLabel(correctAnswer.get(i));
 
@@ -86,6 +95,9 @@ public class CheckAnswerPage extends JFrame {
             if(btnText.equals("뒤로 가기")) {
                 // 뒤 페이지로 이동
                 System.out.println("뒤로 가기");
+                CardLayout card = (CardLayout)panel.getLayout();
+                card.previous(panel);
+
             }else if(btnText.equals("처음 화면으로 가기")) {
                 // 처음 페이지로 이동
                 System.out.println("처음 화면으로 가기");
@@ -95,7 +107,4 @@ public class CheckAnswerPage extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-        new CheckAnswerPage();
-    }
 }

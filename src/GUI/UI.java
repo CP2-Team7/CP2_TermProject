@@ -19,7 +19,6 @@ public class UI extends JFrame {
 		mainPanel.add(new EndPanel(mainPanel), "p3");
 		mainPanel.add(new RankingPanel(mainPanel),"p4");//endPanel 레이아웃
 
-
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 설정
 	}
