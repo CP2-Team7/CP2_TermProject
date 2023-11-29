@@ -74,11 +74,7 @@ public class CategoryPanel extends JPanel {
         			capitalb.setBackground(yellow);
                 	QuestionName qn = QuestionName.valueOf(setcategory);
                 	System.out.println(setcategory); //startpanel에서 만든 user 참조 문제로 프린트로 대체
-<<<<<<< HEAD
                     ui.gameRound.initGameRound(qn,ui.user);
-=======
-                  ui.gameRound.initGameRound(qn,ui.user);
->>>>>>> b7501549ce9fd1f32b01fc1512b0044931c7e189
                 	setcategory="none";
                 }
             }
