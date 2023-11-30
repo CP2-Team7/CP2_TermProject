@@ -69,6 +69,8 @@ public class RankingPanel extends JPanel {
         bBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                CardLayout card = (CardLayout)panel.getLayout();
+                card.show(panel, "p4");
             }
         });
         JButton bMain = new JButton("처음 화면으로 가기");
