@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.List;
-
 import Class.*;
 
 public class Submit extends JPanel {
@@ -27,7 +26,7 @@ public class Submit extends JPanel {
 
         // 중앙 부분 (문제를 표시할 패널)
         questionPanel = new JPanel(new BorderLayout());
-        questionArea = new JTextArea("Question", 30, 100);
+        questionArea = new JTextArea(30, 100);
         questionArea.setEnabled(false);
         questionArea.setFont(new Font("", 0, 50));
 
@@ -58,16 +57,11 @@ public class Submit extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("입력 값:" + answer.getText());
-                userAnswers.add(answer.getText());
-                showNextQuestion();
             }
         });
         bottomPanel.add(nextButton);
-        add(bottomPanel, BorderLayout.SOUTH);
-
-        currentQuestionIndex = 0;
+        setVisible(true);
     }
-
     public void showNextQuestion() {
         if (currentQuestionIndex < questionList.size()) {
             questionArea.setText(questionList.get(currentQuestionIndex).getContent());
@@ -81,14 +75,11 @@ public class Submit extends JPanel {
             // 모든 문제를 풀었을 때
             answer.setText("");
             answer.setEnabled(false);
-            System.out.println("문제 풀이 완료"); // 디버깅
-            System.out.println(userAnswers.toString()); // 디버깅
-            CardLayout card = (CardLayout)panel.getLayout();
-            int score = ui.gameRound.checkAnswer(userAnswers);
-            ui.endPanel.setGameResult(ui.gameRound.currentUser.name, ui.gameRound.currentCategory.getName(), String.valueOf(score));
-            ui.user.setScore(ui.gameRound.currentCategory, score);
-            card.show(panel, "p4");
-
         }
+    }
+
+
+    public static void main(String[] args) {
+        new Submit(new UI());
     }
 }

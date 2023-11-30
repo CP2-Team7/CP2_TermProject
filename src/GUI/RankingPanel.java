@@ -39,6 +39,20 @@ public class RankingPanel extends JPanel {
         
         gameServer.checkLeaderboard(gameRound.checkAnswer(gameRound.answerList), gameRound.currentUser, category);
 
+        java.util.List<User> testRanking = new ArrayList<User>();
+        testRanking.add(new User("a"));
+        testRanking.add(new User("b"));
+        testRanking.add(new User("c"));
+        testRanking.add(new User("d"));
+        testRanking.add(new User("e"));
+        testRanking.add(new User("f"));
+        testRanking.add(new User("g"));
+        testRanking.add(new User("h"));
+        testRanking.add(new User("i"));
+        testRanking.add(new User("j"));
+        testRanking.add(new User("k"));
+        QuestionName category = QuestionName.FOURLETTERS;
+
         switch (category) {
             case CAPITAL:
                 ranking = gameServer.rankingCapital;
@@ -51,7 +65,6 @@ public class RankingPanel extends JPanel {
             default:
                 break;
         }
-
         int cat = 0;
         switch (category) {
             case CAPITAL:
