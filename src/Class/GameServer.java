@@ -4,11 +4,11 @@ import java.util.*;
 public class GameServer {
     List<User> users;
     //implement rankings as linked instead of array
-    List<User> rankingCapital; 
+    public List<User> rankingCapital; 
     void setRankingCaptial(List<User> set) {rankingCapital = set;}
-    List<User> rankingConnection;
+    public List<User> rankingConnection;
     void setRankingConnection(List<User> set) {rankingConnection = set;}
-    List<User> rankingFourLetters;
+    public List<User> rankingFourLetters;
     void setRankingFourLetters(List<User> set) {rankingFourLetters = set;}
 
     final int setSize = 10;
@@ -22,7 +22,7 @@ public class GameServer {
         //do the things where you read from files later
     }
 
-    void checkLeaderboard(int score, User user, QuestionName category) {
+    public void checkLeaderboard(int score, User user, QuestionName category) {
         List<User> leaderboard = rankingCapital;
         int type = 0;
         switch(category) {

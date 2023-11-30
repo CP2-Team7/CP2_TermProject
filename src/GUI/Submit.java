@@ -1,33 +1,28 @@
 package GUI;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 import Class.*;
 
-public class Submit extends JFrame {
-    JPanel mainPanel, questionPanel, bottomPanel;
+public class Submit extends JPanel {
+    JPanel questionPanel, bottomPanel, panel;
     JTextField answer;
     JTextArea questionArea;
-    List<Question> questionL;
-    int currentQuestionIndex = 0;
-    List<String> userAnswers;
+    List<Question> questionList;
+    int currentQuestionIndex;
+    ArrayList<String> userAnswers = new ArrayList<>();
+    UI ui;
 
     public Submit(UI ui) {
-        //GameRound 불러오기
-        questionL = ui.gameRound.getQuestionList();
-        userAnswers = new ArrayList<>();
-
-        setTitle("QUIZZ ME!");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 800);
-
-        mainPanel = new JPanel(new BorderLayout());
+        panel = ui.mainPanel;
+        this.ui = ui;
+        setLayout(new BorderLayout());
 
         // mainPanel에 좌우 여백을 추가
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200));
+        setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200));
 
         // 중앙 부분 (문제를 표시할 패널)
         questionPanel = new JPanel(new BorderLayout());
@@ -44,7 +39,8 @@ public class Submit extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     System.out.println("입력 값:" + answer.getText());
-                    showNextQuestion(questionL, userAnswers, ui);
+                    userAnswers.add(answer.getText());
+                    showNextQuestion();
                 }
             }
         });
@@ -52,7 +48,7 @@ public class Submit extends JFrame {
         questionPanel.add(questionArea, BorderLayout.CENTER);
         questionPanel.add(answer, BorderLayout.SOUTH);
 
-        mainPanel.add(questionPanel, BorderLayout.CENTER);
+        add(questionPanel, BorderLayout.CENTER);
 
         bottomPanel = new JPanel();
         JButton nextButton = new JButton("다음");
@@ -61,31 +57,24 @@ public class Submit extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("입력 값:" + answer.getText());
-                showNextQuestion(questionL, userAnswers, ui);
             }
         });
         bottomPanel.add(nextButton);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        add(mainPanel);
-        showNextQuestion(questionL, userAnswers, ui);
         setVisible(true);
     }
-    public void showNextQuestion(List<Question> q, List<String> a, UI ui) {
-        if (currentQuestionIndex < q.size()) {
-            questionArea.setText(q.get(currentQuestionIndex).getContent());
-
-            userAnswers.add(answer.getText());
+    public void showNextQuestion() {
+        if (currentQuestionIndex < questionList.size()) {
+            questionArea.setText(questionList.get(currentQuestionIndex).getContent());
 
             currentQuestionIndex++;
 
             answer.setText(""); // 이전 답 초기화
             answer.requestFocus(); // 텍스트 필드에 포커스
+
         } else {
             // 모든 문제를 풀었을 때
             answer.setText("");
             answer.setEnabled(false);
-            ui.gameRound.checkAnswer(a);
         }
     }
 

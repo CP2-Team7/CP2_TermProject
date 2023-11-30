@@ -1,5 +1,10 @@
 package GUI;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -15,20 +20,25 @@ import Class.User;
 public class RankingPanel extends JPanel {
     JPanel panel;
 
-    RankingPanel(UI ui) {
+    public RankingPanel(UI ui) {
         super();
-        panel = cl;
+        panel = ui.mainPanel;
         setLayout(null);
         JTextArea rankings = new JTextArea(9, 20);
         rankings.setEditable(false);
         rankings.append("리더보드\n");
-        GameRound gameRound;
-        GameServer gameServer;
+        GameRound gameRound = ui.gameRound;
+        GameServer gameServer = ui.gameServer;
+        QuestionName category = gameRound.currentCategory;
+        java.util.List<User> ranking = null;
+        
+        Color blue = new Color(0x393E64);
+        Color yellow = new Color(0xF1C832);
+        setBackground(blue);
+        
+        
+        gameServer.checkLeaderboard(gameRound.checkAnswer(gameRound.answerList), gameRound.currentUser, category);
 
-        //gameServer.checkLeaderboard(gameRound.checkAnswer(gameRound.answerList), gameRound.currentuser);
-
-        //test
-        //
         java.util.List<User> testRanking = new ArrayList<User>();
         testRanking.add(new User("a"));
         testRanking.add(new User("b"));
@@ -42,8 +52,19 @@ public class RankingPanel extends JPanel {
         testRanking.add(new User("j"));
         testRanking.add(new User("k"));
         QuestionName category = QuestionName.FOURLETTERS;
-        //test
 
+        switch (category) {
+            case CAPITAL:
+                ranking = gameServer.rankingCapital;
+                break;
+            case CONNECTION:
+                ranking = gameServer.rankingConnection;
+                break;
+            case FOURLETTERS:
+                ranking = gameServer.rankingFourLetters;
+            default:
+                break;
+        }
         int cat = 0;
         switch (category) {
             case CAPITAL:
@@ -59,22 +80,45 @@ public class RankingPanel extends JPanel {
                 break;
         }
         
-        for(int i = 0; i < testRanking.size(); i++) {
-            User u = testRanking.get(i);
+        for(int i = 0; i < ranking.size(); i++) {
+            User u = ranking.get(i);
             rankings.append(i + "위\t" + u.name + "\t" + u.score[cat] + "\n");
         }
 
         JButton bBack = new JButton("뒤로가기");
-        bBack.addActionListener(e -> System.out.println("뒤로 감"));	//cardlayout 제대로 되면 바꾸기
+        bBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         JButton bMain = new JButton("처음 화면으로 가기");
-        bMain.addActionListener(e -> System.out.println("처음 화면으로 감"));	//cardlayout 제대로 되면 바꾸기
-
-        //위치는 나중에 조율
+        bMain.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout card = (CardLayout)panel.getLayout();
+                card.show(panel, "p1");
+            }
+        });
+        //폰트 및 색 지정
+        bBack.setFont(new Font("PLAIN",Font.ITALIC,25));
+        bMain.setFont(new Font("PLAIN",Font.ITALIC,25));
+        bBack.setForeground(blue);
+        bBack.setBackground(yellow);
+        bMain.setForeground(blue);
+        bMain.setBackground(yellow);
+        rankings.setForeground(Color.GRAY);
+        rankings.setFont(new Font("PLAIN",Font.BOLD,35));
+        
+        //글자 나오는거 보고 rankings 사이즈 조절(좌우 여백 동일하게 맞추기)
         add(rankings);
-        rankings.setBounds(500, 0, 200, 230);
+        rankings.setBounds(250, 125, 700, 400);
         add(bBack);
-        bBack.setBounds(300, 400, 150, 30);
+        bBack.setBounds(200, 600, 300, 100);
         add(bMain);
-        bMain.setBounds(750, 400, 150, 30);
+        bMain.setBounds(700, 600, 300, 100);
+
+    }
+
+    public static void main(String[] args) {
     }
 }
