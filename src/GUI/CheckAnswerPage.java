@@ -14,23 +14,22 @@ public class CheckAnswerPage extends JPanel {
 
     private final int questionNumber = 10;
     private JPanel CheckAnswerPanel, buttonPanel, panel;
+    public JLabel label;
 
-    // dummy data
-    List<String> question = new ArrayList<>(List.of("중국의 수도는?", "인도의 수도는?", "라오스의 수도는?", "이스라엘의 수도는?", "필리핀의 수도는?", "말레이시아의 수도는?", "요르단의 수도는?", "오스트리아의 수도는?", "러시아의 수도는?", "이탈리아의 수도는?"));
-    List<String> userAnswer = new ArrayList<>(List.of("베이징", "뉴델리", "비엔티안", "예루살렘", "마닐라", "쿠알라룸푸트", "암만", "비엔나", "모스크바", "로마"));
-    List<String> correctAnswer = new ArrayList<>(List.of("빅토리아", "베이징", "비엔티안", "예루살렘", "몰라", "쿠알라룸푸트", "암만", "몰라", "모스크바", "로마"));
-    List<Integer> scoreList = new ArrayList<>(List.of(0, 0, 1, 1, 0, 1, 1, 0, 1, 1));
+    List<Question> question;
+    List<String> userAnswer;
+    List<String> correctAnswer;
+    List<Integer> scoreList;
+    List<JLabel> questionLabelList, userAnswerLabelList, correctAnswerLabelList;
+    UI ui;
 
     public CheckAnswerPage(UI ui) {
         panel = ui.mainPanel;
-//        question = GameRound.getQuestionList();
-//        correctAnswer = GameRound.getAnswerList();
-        //scoreList = GameRound.getScoreList();
+        this.ui = ui;
+        questionLabelList= new ArrayList<>();
+        userAnswerLabelList= new ArrayList<>();
+        correctAnswerLabelList= new ArrayList<>();
 
-
-        //setSize(1200, 800);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setTitle("정답 확인");
         setLayout(new BorderLayout());
 
         CheckAnswerPanel = new CheckAnswerPanel();
@@ -44,7 +43,6 @@ public class CheckAnswerPage extends JPanel {
 
     class CheckAnswerPanel extends JPanel {
         private JLabel questionTitle, userAnswerTitle, correctAnswerTitle;
-        private JLabel questionLabel, userAnswerLabel, correctAnswerLabel;
 
         public CheckAnswerPanel() {
 
@@ -58,19 +56,17 @@ public class CheckAnswerPage extends JPanel {
             add(userAnswerTitle);
             add(correctAnswerTitle);
 
+            // 초기화 세팅
             for(int i = 0; i < questionNumber; i++) {
-                questionLabel = new JLabel(question.get(i));
-                userAnswerLabel = new JLabel(userAnswer.get(i));
-                correctAnswerLabel = new JLabel(correctAnswer.get(i));
-
-                if (scoreList.get(i) == 0) {
-                    questionLabel.setForeground(Color.red);
-                    userAnswerLabel.setForeground(Color.red);
-                    correctAnswerLabel.setForeground(Color.red);
-                }
-                add(questionLabel);
-                add(userAnswerLabel);
-                add(correctAnswerLabel);
+                label = new JLabel("default");
+                add(label);
+                questionLabelList.add(label);
+                label = new JLabel("default");
+                add(label);
+                userAnswerLabelList.add(label);
+                label = new JLabel("default");
+                add(label);
+                correctAnswerLabelList.add(label);
             }
         }
     }
@@ -91,20 +87,36 @@ public class CheckAnswerPage extends JPanel {
         public void actionPerformed(ActionEvent e) {
             JButton srcButton = (JButton) e.getSource();
             String btnText = srcButton.getText();
-
+            CardLayout card = (CardLayout)panel.getLayout();
             if(btnText.equals("뒤로 가기")) {
                 // 뒤 페이지로 이동
-                System.out.println("뒤로 가기");
-                CardLayout card = (CardLayout)panel.getLayout();
                 card.previous(panel);
 
             }else if(btnText.equals("처음 화면으로 가기")) {
                 // 처음 페이지로 이동
-                System.out.println("처음 화면으로 가기");
+                card.first(panel);
             }
 
         }
 
     }
+    public void setList() {
+        question = ui.gameRound.getQuestionList();
+        correctAnswer = ui.gameRound.getAnswerList();
+        scoreList = ui.gameRound.getScoreList();
+        userAnswer = ui.submit.userAnswers;
 
+        for(int i = 0; i < questionNumber; i++) {
+            questionLabelList.get(i).setText(question.get(i).content);
+            userAnswerLabelList.get(i).setText(userAnswer.get(i));
+            correctAnswerLabelList.get(i).setText(correctAnswer.get(i));
+
+            if(scoreList.get(i) == 0) {
+                questionLabelList.get(i).setForeground(Color.red);
+                userAnswerLabelList.get(i).setForeground(Color.red);
+                correctAnswerLabelList.get(i).setForeground(Color.red);
+            }
+
+        }
+    }
 }
