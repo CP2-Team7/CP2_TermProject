@@ -20,7 +20,7 @@ public class GameRound {
         scoreList = new ArrayList<>();
         setQuestionListRandom(currentCategory);
     }
-
+    public QuestionName getCurrentCategory() {return currentCategory;}
     public List<Question> getQuestionList() {
         return questionList;
     }

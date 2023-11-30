@@ -12,6 +12,9 @@ public class UI extends JFrame {
 	public GameServer gameServer; // Server
 	public GameRound gameRound; // Controller
 	public User user;
+	public Submit submit;
+	public EndPanel endPanel;
+	public CheckAnswerPage checkAnswerPage;
 
 	public UI() {
 		gameServer = new GameServer(); // Server
@@ -24,12 +27,16 @@ public class UI extends JFrame {
 		add(mainPanel);
 		setResizable(false);
 
+		submit = new Submit(this);
+		endPanel = new EndPanel(this);
+		checkAnswerPage = new CheckAnswerPage(this);
+
 		mainPanel.add(new StartPanel(this),"p1");//start패널 레이아웃
 		mainPanel.add(new CategoryPanel(this),"p2");//카테고리 패널 레이아웃
-		mainPanel.add(new Submit(this), "p3");
-		mainPanel.add(new EndPanel(this), "p4");//endPanel 레이아웃
-		mainPanel.add(new RankingPanel(this),"p5");
-		mainPanel.add(new CheckAnswerPage(this), "p6");
+		mainPanel.add(submit, "p3");
+		mainPanel.add(endPanel, "p4");//endPanel 레이아웃
+//		mainPanel.add(new RankingPanel(this),"p5");
+		mainPanel.add(checkAnswerPage, "p6");
 
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프레임 설정

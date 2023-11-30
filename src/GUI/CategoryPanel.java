@@ -67,15 +67,21 @@ public class CategoryPanel extends JPanel {
                 	selectcatl.setForeground(Color.RED);
                 }
                 else {
-                	card.show(panel, "p3");
                 	selectcatl.setForeground(Color.WHITE);
                 	fourletterb.setBackground(yellow);
         			connectionb.setBackground(yellow);
         			capitalb.setBackground(yellow);
                 	QuestionName qn = QuestionName.valueOf(setcategory);
-                	System.out.println(setcategory); //startpanel에서 만든 user 참조 문제로 프린트로 대체
-                  ui.gameRound.initGameRound(qn,ui.user);
+                    ui.gameRound.initGameRound(qn,ui.user);
+                    System.out.println(setcategory); //디버깅
+                    ui.gameRound.printAllItem(); // 디버깅
+
+                    // Submit 클래스의 questionList 초기화
+                    ui.submit.questionList = ui.gameRound.questionList;
+                    ui.submit.showNextQuestion();
+
                 	setcategory="none";
+                    card.show(panel, "p3");
                 }
             }
         });
