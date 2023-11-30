@@ -1,11 +1,9 @@
 package GUI;
 
 import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.*;
-import Class.*;
 
 
 public class StartPanel extends JPanel {
@@ -38,7 +36,7 @@ public class StartPanel extends JPanel {
                 ui.user.setName(nametxt.getText()); //입력받은 닉네임으로 User 클래스 user생성
 
 				System.out.println("입력된 문자열 : " + nametxt.getText()); //디버깅
-				System.out.println("저장된 유저 이름 : 깅" + ui.user.getName()); //디버깅
+				System.out.println("저장된 유저 이름 : " + ui.user.getName()); //디버깅
 
                 card.next(panel);
             }

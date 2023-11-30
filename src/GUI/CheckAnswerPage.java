@@ -14,7 +14,7 @@ public class CheckAnswerPage extends JPanel {
 
     private final int questionNumber = 10;
     private JPanel CheckAnswerPanel, buttonPanel, panel;
-    public JLabel label, questionLabel, userAnswerLabel, correctAnswerLabel;
+    public JLabel label;
 
     List<Question> question;
     List<String> userAnswer;

@@ -4,21 +4,20 @@ import java.awt.*;
 import javax.swing.*;
 
 import Class.*;
-import GUI.*;
-
 
 public class UI extends JFrame {
 	public JPanel mainPanel;
 	public GameServer gameServer; // Server
 	public GameRound gameRound; // Controller
 	public User user;
+	// page
 	public Submit submit;
 	public EndPanel endPanel;
 	public CheckAnswerPage checkAnswerPage;
 
 	public UI() {
-		gameServer = new GameServer(); // Server
-		gameRound = new GameRound(); // Controller
+		gameServer = new GameServer();
+		gameRound = new GameRound();
 		user = new User();
 
 		setSize(1200,800);

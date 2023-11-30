@@ -1,18 +1,11 @@
 package GUI;
 
-import java.awt.CardLayout;
-
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import Class.GameRound;
-import Class.QuestionName;
+import Class.*;
 
 
 public class CategoryPanel extends JPanel {
@@ -80,8 +73,8 @@ public class CategoryPanel extends JPanel {
                     ui.submit.questionList = ui.gameRound.questionList;
                     ui.submit.showNextQuestion();
 
-                	setcategory="none";
                     card.show(panel, "p3");
+                    setcategory="none";
                 }
             }
         });
