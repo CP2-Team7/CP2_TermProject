@@ -3,7 +3,7 @@ package GUI;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 import Class.*;
 
@@ -53,31 +53,34 @@ public class Submit extends JPanel {
         bottomPanel = new JPanel();
         JButton nextButton = new JButton("다음");
         nextButton.setPreferredSize(new Dimension(200, 30));
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("입력 값:" + answer.getText());
-            }
+
+        // 다음 버튼의 ActionListener를 람다식으로 변경
+        nextButton.addActionListener(e -> {
+            System.out.println("입력 값:" + answer.getText());
         });
+
         bottomPanel.add(nextButton);
         setVisible(true);
     }
+
+    // showNextQuestion 메서드를 스트림과 람다식을 사용하여 변경
     public void showNextQuestion() {
-        if (currentQuestionIndex < questionList.size()) {
-            questionArea.setText(questionList.get(currentQuestionIndex).getContent());
+        currentQuestionIndex = Math.min(currentQuestionIndex + 1, questionList.size());
 
-            currentQuestionIndex++;
+        questionList.stream()
+                .limit(currentQuestionIndex)
+                .forEach(question -> {
+                    questionArea.setText(question.getContent());
+                    answer.setText(""); // 이전 답 초기화
+                    answer.requestFocus(); // 텍스트 필드에 포커스
+                });
 
-            answer.setText(""); // 이전 답 초기화
-            answer.requestFocus(); // 텍스트 필드에 포커스
-
-        } else {
-            // 모든 문제를 풀었을 때
+        // 모든 문제를 풀었을 때
+        if (currentQuestionIndex == questionList.size()) {
             answer.setText("");
             answer.setEnabled(false);
         }
     }
-
 
     public static void main(String[] args) {
         new Submit(new UI());
