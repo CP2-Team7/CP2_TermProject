@@ -34,7 +34,7 @@ public class UI extends JFrame {
 		mainPanel.add(new CategoryPanel(this),"p2");//카테고리 패널 레이아웃
 		mainPanel.add(submit, "p3");
 		mainPanel.add(endPanel, "p4");//endPanel 레이아웃
-//		mainPanel.add(new RankingPanel(this),"p5");
+		//mainPanel.add(new RankingPanel(this),"p5");
 		mainPanel.add(checkAnswerPage, "p6");
 
 		setVisible(true);
