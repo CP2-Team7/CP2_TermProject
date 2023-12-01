@@ -34,6 +34,7 @@ public class Submit extends JPanel {
         questionArea = new JTextArea(30, 100);
         questionArea.setEnabled(false);
         questionArea.setFont(new Font("", 0, 50));
+        questionArea.setLineWrap(true);
 
         questionArea.setEditable(false);
         questionArea.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
@@ -69,6 +70,8 @@ public class Submit extends JPanel {
         // 다음 버튼의 ActionListener를 람다식으로 변경
         nextButton.addActionListener(e -> {
             System.out.println("입력 값:" + answer.getText());
+            userAnswers.add(answer.getText());
+            showNextQuestion();
             if (currentQuestionIndex == questionList.size() + 1) {
                 CardLayout card = (CardLayout)panel.getLayout();
                 card.show(panel, "p4");
