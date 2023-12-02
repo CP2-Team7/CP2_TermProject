@@ -31,13 +31,27 @@ public class RankingPanel extends JPanel {
         GameServer gameServer = ui.gameServer;
         QuestionName category = gameRound.currentCategory;
         java.util.List<User> ranking = null;
-        
+
         Color blue = new Color(0x393E64);
         Color yellow = new Color(0xF1C832);
         setBackground(blue);
-        
-        
+
+
         gameServer.checkLeaderboard(gameRound.checkAnswer(gameRound.answerList), gameRound.currentUser, category);
+
+        java.util.List<User> testRanking = new ArrayList<User>();
+        testRanking.add(new User("a"));
+        testRanking.add(new User("b"));
+        testRanking.add(new User("c"));
+        testRanking.add(new User("d"));
+        testRanking.add(new User("e"));
+        testRanking.add(new User("f"));
+        testRanking.add(new User("g"));
+        testRanking.add(new User("h"));
+        testRanking.add(new User("i"));
+        testRanking.add(new User("j"));
+        testRanking.add(new User("k"));
+        //QuestionName category = QuestionName.FOURLETTERS;
 
         switch (category) {
             case CAPITAL:
@@ -51,7 +65,6 @@ public class RankingPanel extends JPanel {
             default:
                 break;
         }
-
         int cat = 0;
         switch (category) {
             case CAPITAL:
@@ -66,7 +79,7 @@ public class RankingPanel extends JPanel {
             default:
                 break;
         }
-        
+
         for(int i = 0; i < ranking.size(); i++) {
             User u = ranking.get(i);
             rankings.append(i + "위\t" + u.name + "\t" + u.score[cat] + "\n");
@@ -95,7 +108,7 @@ public class RankingPanel extends JPanel {
         bMain.setBackground(yellow);
         rankings.setForeground(Color.GRAY);
         rankings.setFont(new Font("PLAIN",Font.BOLD,35));
-        
+
         //글자 나오는거 보고 rankings 사이즈 조절(좌우 여백 동일하게 맞추기)
         add(rankings);
         rankings.setBounds(250, 125, 700, 400);
