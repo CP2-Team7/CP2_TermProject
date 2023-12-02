@@ -51,7 +51,7 @@ public class RankingPanel extends JPanel {
         testRanking.add(new User("i"));
         testRanking.add(new User("j"));
         testRanking.add(new User("k"));
-        QuestionName category = QuestionName.FOURLETTERS;
+        //QuestionName category = QuestionName.FOURLETTERS;
 
         switch (category) {
             case CAPITAL:
