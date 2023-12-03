@@ -18,32 +18,33 @@ public class EndPanel extends JPanel {
 	public EndPanel(UI ui) {
 		super();
 		panel =  ui.mainPanel;
-		
-		Color blue = new Color(0x393E64);
-        Color yellow = new Color(0xF1C832);
-        
+
+		JLabel logoLabel = new JLabel(ui.smallIconImg);
+		logoLabel.setBounds(10, 30, 200, 100);
+		add(logoLabel);
+
 		JButton toRankingb = new JButton("랭킹 보러가기");
 		JButton toMarkingb = new JButton("내 정답 보러가기");
 		JButton toFirstb = new JButton("처음 화면으로 가기");
 
 		resultl = new JLabel();
 		
-		resultl.setFont(new Font("PLAIN",Font.BOLD,35));
-		toRankingb.setFont(new Font("PLAIN",Font.ITALIC,25));
-		toMarkingb.setFont(new Font("PLAIN",Font.ITALIC,25));
-		toFirstb.setFont(new Font("PLAIN",Font.ITALIC,25));
-		resultl.setBounds(200, 300, 800, 100);
-		toRankingb.setBounds(75, 500, 300, 100);
-		toMarkingb.setBounds(450, 500, 300, 100);
-		toFirstb.setBounds(825, 500, 300, 100);
-		setBackground(blue);
+		resultl.setFont(ui.titleFont);
+		toRankingb.setFont(ui.buttonFont);
+		toMarkingb.setFont(ui.buttonFont);
+		toFirstb.setFont(ui.buttonFont);
+		resultl.setBounds(300, 300, 800, 60);
+		toRankingb.setBounds(75, 500, 250, 60);
+		toMarkingb.setBounds(450, 500, 250, 60);
+		toFirstb.setBounds(825, 500, 250, 60);
+		setBackground(ui.mainBlue);
 		resultl.setForeground(Color.WHITE);
-		toRankingb.setForeground(blue);
-		toFirstb.setForeground(blue);
-		toMarkingb.setForeground(blue);
-		toRankingb.setBackground(yellow);
-		toFirstb.setBackground(yellow);
-		toMarkingb.setBackground(yellow);
+		toRankingb.setForeground(ui.mainBlue);
+		toFirstb.setForeground(ui.mainBlue);
+		toMarkingb.setForeground(ui.mainBlue);
+		toRankingb.setBackground(ui.mainYellow);
+		toFirstb.setBackground(ui.mainYellow);
+		toMarkingb.setBackground(ui.mainYellow);
 		
 		setLayout(null);
 		add(resultl);
@@ -70,6 +71,7 @@ public class EndPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout card = (CardLayout)panel.getLayout();
 				card.show(panel, "p5");
+				ui.rankingPage.drawRaking(ui);
 			}
 		});//처음으로 버튼 액션리스너 등록(카드레이아웃 사용)
 
