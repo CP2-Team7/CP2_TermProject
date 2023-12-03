@@ -1,6 +1,7 @@
 package Class;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class GameRound {
     static final int stepNumber = 10;
@@ -54,17 +55,10 @@ public class GameRound {
     // 유저가 제출한 답 : String 타입의 list (문제 순서대로)
     // return : total score (int)
     public int checkAnswer(List<String> userAnswerList) {
-        int totalScore = 0;
-
-        for(int i = 0; i < answerList.size(); i++) {
-            if(answerList.get(i).equals(userAnswerList.get(i))) {
-                scoreList.add(1);
-                totalScore++;
-            } else {
-                scoreList.add(0);
-            }
-        }
-        return totalScore * scoreRate;
+        return IntStream.range(0, answerList.size())
+                .mapToObj(i -> answerList.get(i).equals(userAnswerList.get(i)) ? 1 : 0)
+                .peek(scoreList::add)
+                .reduce(0, Integer::sum) * scoreRate;
     }
 
     // 중복 없이 범위 내에서 난수 생성
