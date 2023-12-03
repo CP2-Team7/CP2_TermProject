@@ -1,15 +1,13 @@
 package GUI;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
+import java.util.jar.JarEntry;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 import Class.GameRepository;
 import Class.GameRound;
@@ -19,76 +17,59 @@ import Class.User;
 
 public class RankingPanel extends JPanel {
     JPanel panel;
+    JLabel categoryLabel;
+    GameServer gameServer;
+    GameRound gameRound;
+    JTextArea rankings;
+
 
     public RankingPanel(UI ui) {
         super();
         panel = ui.mainPanel;
-        setLayout(null);
-        JTextArea rankings = new JTextArea(9, 20);
+        setLayout(new BorderLayout());
+        setBackground(ui.mainBlue);
+
+        JLabel logoLabel = new JLabel(ui.smallIconImg);
+        logoLabel.setBounds(10, 30, 200, 100);
+        add(logoLabel);
+
+        JPanel rankingP = new JPanel();
+        rankingP.setLayout(new BorderLayout());
+
+        JPanel titleP = new JPanel();
+        categoryLabel = new JLabel("default");
+        JLabel title = new JLabel("   랭킹");
+        categoryLabel.setFont(ui.titleFont);
+        title.setFont(ui.titleFont);
+        categoryLabel.setForeground(ui.mainBlue);
+        title.setForeground(ui.mainBlue);
+        titleP.add(categoryLabel);
+        titleP.add(title);
+
+
+        rankings = new JTextArea(10, 20);
+
         rankings.setEditable(false);
-        rankings.append("리더보드\n");
-        GameRound gameRound = ui.gameRound;
-        GameServer gameServer = ui.gameServer;
-        QuestionName category = gameRound.currentCategory;
-        java.util.List<User> ranking = null;
+        rankings.setFont(ui.buttonFont);
+        rankings.setBorder(BorderFactory.createEmptyBorder(20, 300, 20, 0));
 
-        Color blue = new Color(0x393E64);
-        Color yellow = new Color(0xF1C832);
-        setBackground(blue);
+        JScrollPane scrollPane = new JScrollPane(rankings);
 
+        rankingP.add(titleP, BorderLayout.NORTH);
+        rankingP.add(scrollPane, BorderLayout.CENTER);
 
-        gameServer.checkLeaderboard(gameRound.checkAnswer(gameRound.answerList), gameRound.currentUser, category);
+        setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200));
 
-        java.util.List<User> testRanking = new ArrayList<User>();
-        testRanking.add(new User("a"));
-        testRanking.add(new User("b"));
-        testRanking.add(new User("c"));
-        testRanking.add(new User("d"));
-        testRanking.add(new User("e"));
-        testRanking.add(new User("f"));
-        testRanking.add(new User("g"));
-        testRanking.add(new User("h"));
-        testRanking.add(new User("i"));
-        testRanking.add(new User("j"));
-        testRanking.add(new User("k"));
-        //QuestionName category = QuestionName.FOURLETTERS;
+        add(rankingP, BorderLayout.CENTER);
 
-        switch (category) {
-            case CAPITAL:
-                ranking = gameServer.rankingCapital;
-                break;
-            case CONNECTION:
-                ranking = gameServer.rankingConnection;
-                break;
-            case FOURLETTERS:
-                ranking = gameServer.rankingFourLetters;
-            default:
-                break;
-        }
-        int cat = 0;
-        switch (category) {
-            case CAPITAL:
-                cat = 0;
-                break;
-            case CONNECTION:
-                cat = 1;
-                break;
-            case FOURLETTERS:
-                cat = 2;
-                break;
-            default:
-                break;
-        }
-
-        for(int i = 0; i < ranking.size(); i++) {
-            User u = ranking.get(i);
-            rankings.append(i + "위\t" + u.name + "\t" + u.score[cat] + "\n");
-        }
+        JPanel buttonPanel = new JPanel();
 
         JButton bBack = new JButton("뒤로가기");
         bBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                CardLayout card = (CardLayout)panel.getLayout();
+                card.previous(panel);
             }
         });
         JButton bMain = new JButton("처음 화면으로 가기");
@@ -96,29 +77,68 @@ public class RankingPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CardLayout card = (CardLayout)panel.getLayout();
-                card.show(panel, "p1");
+                card.first(panel);
             }
         });
-        //폰트 및 색 지정
-        bBack.setFont(new Font("PLAIN",Font.ITALIC,25));
-        bMain.setFont(new Font("PLAIN",Font.ITALIC,25));
-        bBack.setForeground(blue);
-        bBack.setBackground(yellow);
-        bMain.setForeground(blue);
-        bMain.setBackground(yellow);
-        rankings.setForeground(Color.GRAY);
-        rankings.setFont(new Font("PLAIN",Font.BOLD,35));
 
-        //글자 나오는거 보고 rankings 사이즈 조절(좌우 여백 동일하게 맞추기)
-        add(rankings);
-        rankings.setBounds(250, 125, 700, 400);
-        add(bBack);
-        bBack.setBounds(200, 600, 300, 100);
-        add(bMain);
-        bMain.setBounds(700, 600, 300, 100);
+        bBack.setPreferredSize(new Dimension(250, 60));
+        bMain.setPreferredSize(new Dimension(250, 60));
+        bBack.setFont(ui.buttonFont);
+        bMain.setFont(ui.buttonFont);
+        bBack.setBackground(ui.mainYellow);
+        bMain.setBackground(ui.mainYellow);
+        bBack.setForeground(ui.mainBlue);
+        bMain.setForeground(ui.mainBlue);
+        buttonPanel.setLayout(new GridLayout(1, 2, 10, 10));
+        buttonPanel.add(bBack);
+        buttonPanel.add(bMain);
+        buttonPanel.setBackground(ui.mainBlue);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(60 , 0 , 0 , 0));
+        add(buttonPanel, BorderLayout.SOUTH);
 
     }
+    public void drawRaking(UI uui) {
 
-    public static void main(String[] args) {
+        QuestionName category = uui.gameRound.currentCategory;
+        categoryLabel.setText(category.getName());
+
+
+        String userList = uui.gameServer.checkLeaderboard(uui);
+
+        rankings.setText(userList.toString());
+
+
+
+//        JButton bBack = new JButton("뒤로가기");
+//        bBack.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//            }
+//        });
+//        JButton bMain = new JButton("처음 화면으로 가기");
+//        bMain.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                CardLayout card = (CardLayout)panel.getLayout();
+//                card.show(panel, "p1");
+//            }
+//        });
+//        //폰트 및 색 지정
+//        bBack.setFont(new Font("PLAIN",Font.ITALIC,25));
+//        bMain.setFont(new Font("PLAIN",Font.ITALIC,25));
+//        bBack.setForeground(ui.mainBlue);
+//        bBack.setBackground(ui.mainYellow);
+//        bMain.setForeground(ui.mainBlue);
+//        bMain.setBackground(ui.mainYellow);
+//        rankings.setForeground(Color.GRAY);
+//        rankings.setFont(new Font("PLAIN",Font.BOLD,35));
+//
+//        //글자 나오는거 보고 rankings 사이즈 조절(좌우 여백 동일하게 맞추기)
+//        add(rankings);
+//        rankings.setBounds(250, 125, 700, 400);
+//        add(bBack);
+//        bBack.setBounds(200, 600, 300, 100);
+//        add(bMain);
+//        bMain.setBounds(700, 600, 300, 100);
     }
 }
