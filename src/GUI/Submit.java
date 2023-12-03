@@ -76,9 +76,13 @@ public class Submit extends JPanel {
                 CardLayout card = (CardLayout)panel.getLayout();
                 card.show(panel, "p4");
                 currentQuestionIndex = 0;
+
+                int score = ui.gameRound.checkAnswer(userAnswers);
+                ui.endPanel.setGameResult(ui.gameRound.currentUser.name, ui.gameRound.currentCategory.getName(), String.valueOf(score));
+                ui.user.setScore(ui.gameRound.currentCategory, score);
             }
         });
-
+    
         bottomPanel.add(nextButton);
         add(bottomPanel, BorderLayout.SOUTH);
         setVisible(true);
