@@ -23,7 +23,6 @@ public class GameServer {
         rankingCapital = GameRepository.rankingCapital;
         rankingConnection = GameRepository.rankingConnection;
         rankingFourLetters = GameRepository.rankingFourLetters;
-        //do the things where you read from files later
     }
 
     public String checkLeaderboard(UI uui) {
