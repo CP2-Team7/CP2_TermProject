@@ -65,13 +65,13 @@ public class CheckAnswerPage extends JPanel {
             correctAnswerTitle = new JLabel("정답", SwingConstants.CENTER);
 
             add(questionTitle);
-            questionTitle.setBounds(100, 10, 50, 20);
+            questionTitle.setBounds(0, 10, 300, 20);
             questionTitle.setFont(font);
             add(userAnswerTitle);
-            userAnswerTitle.setBounds(465, 10, 70, 20);
+            userAnswerTitle.setBounds(350, 10, 300, 20);
             userAnswerTitle.setFont(font);
             add(correctAnswerTitle);
-            correctAnswerTitle.setBounds(850, 10, 50, 20);
+            correctAnswerTitle.setBounds(700, 10, 300, 20);
             correctAnswerTitle.setFont(font);
 
             // 초기화 세팅
@@ -79,19 +79,19 @@ public class CheckAnswerPage extends JPanel {
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(font);
                 add(label);
-                label.setBounds(100, 65 + (50 * i), 50, 20);
+                label.setBounds(0, 65 + (50 * i), 300, 20);
                 questionLabelList.add(label);
 
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(font);
                 add(label);
-                label.setBounds(465, 65 + (50 * i), 50, 20);
+                label.setBounds(350, 65 + (50 * i), 300, 20);
                 userAnswerLabelList.add(label);
 
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(font);
                 add(label);
-                label.setBounds(850, 65 + (50 * i), 50, 20);
+                label.setBounds(700, 65 + (50 * i), 300, 20);
                 correctAnswerLabelList.add(label);
             }
         }
@@ -125,7 +125,7 @@ public class CheckAnswerPage extends JPanel {
             CardLayout card = (CardLayout)panel.getLayout();
             if(btnText.equals("뒤로 가기")) {
                 // 뒤 페이지로 이동
-                card.previous(panel);
+                card.show(panel, "p4");
 
             }else if(btnText.equals("처음 화면으로 가기")) {
                 // 처음 페이지로 이동
