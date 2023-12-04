@@ -1,8 +1,6 @@
 package GUI;
 
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -31,12 +29,7 @@ public class RankingPanel extends JPanel {
         GameServer gameServer = ui.gameServer;
         QuestionName category = gameRound.currentCategory;
         java.util.List<User> ranking = null;
-        
-        Color blue = new Color(0x393E64);
-        Color yellow = new Color(0xF1C832);
-        setBackground(blue);
-        
-        
+
         gameServer.checkLeaderboard(gameRound.checkAnswer(gameRound.answerList), gameRound.currentUser, category);
 
         switch (category) {
@@ -88,26 +81,13 @@ public class RankingPanel extends JPanel {
                 card.show(panel, "p1");
             }
         });
-        //폰트 및 색 지정
-        bBack.setFont(new Font("PLAIN",Font.ITALIC,25));
-        bMain.setFont(new Font("PLAIN",Font.ITALIC,25));
-        bBack.setForeground(blue);
-        bBack.setBackground(yellow);
-        bMain.setForeground(blue);
-        bMain.setBackground(yellow);
-        rankings.setForeground(Color.GRAY);
-        rankings.setFont(new Font("PLAIN",Font.BOLD,35));
-        
-        //글자 나오는거 보고 rankings 사이즈 조절(좌우 여백 동일하게 맞추기)
+
+        //위치는 나중에 조율
         add(rankings);
-        rankings.setBounds(250, 125, 700, 400);
+        rankings.setBounds(500, 0, 200, 230);
         add(bBack);
-        bBack.setBounds(200, 600, 300, 100);
+        bBack.setBounds(300, 400, 150, 30);
         add(bMain);
-        bMain.setBounds(700, 600, 300, 100);
-
-    }
-
-    public static void main(String[] args) {
+        bMain.setBounds(750, 400, 150, 30);
     }
 }
