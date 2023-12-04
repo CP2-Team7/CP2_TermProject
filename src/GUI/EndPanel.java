@@ -12,57 +12,42 @@ import javax.swing.JPanel;
 
 
 public class EndPanel extends JPanel {
-	JPanel panel, labelPanel;
-	JLabel label1, label2, label3, nameLabel, categoryLabel, scoreLabel;
+	JPanel panel;
+	JLabel resultl;
 
 	public EndPanel(UI ui) {
 		super();
 		panel =  ui.mainPanel;
-		
-		Color blue = new Color(0x393E64);
-        Color yellow = new Color(0xF1C832);
-        
+
+		JLabel logoLabel = new JLabel(ui.smallIconImg);
+		logoLabel.setBounds(10, 30, 200, 100);
+		add(logoLabel);
+
 		JButton toRankingb = new JButton("랭킹 보러가기");
 		JButton toMarkingb = new JButton("내 정답 보러가기");
 		JButton toFirstb = new JButton("처음 화면으로 가기");
 
-		labelPanel = new JPanel();
-
-		label1 = new JLabel("님의 ");
-		label2 = new JLabel(" 점수는 ");
-		label3 = new JLabel("점 입니다!");
-
-		nameLabel = new JLabel("Name");
-		categoryLabel = new JLabel("Category");
-		scoreLabel = new JLabel("Score");
-
-		labelPanel.add(nameLabel);
-		labelPanel.add(label1);
-		labelPanel.add(categoryLabel);
-		labelPanel.add(label2);
-		labelPanel.add(scoreLabel);
-		labelPanel.add(label3);
-
-
-		labelPanel.setFont(new Font("PLAIN",Font.BOLD,35));
-		toRankingb.setFont(new Font("PLAIN",Font.ITALIC,25));
-		toMarkingb.setFont(new Font("PLAIN",Font.ITALIC,25));
-		toFirstb.setFont(new Font("PLAIN",Font.ITALIC,25));
-		toRankingb.setBounds(75, 500, 300, 100);
-		toMarkingb.setBounds(450, 500, 300, 100);
-		toFirstb.setBounds(825, 500, 300, 100);
-		labelPanel.setBounds(100, 200, 1000, 200);
-		setBackground(blue);
-		labelPanel.setForeground(Color.WHITE);
-		toRankingb.setForeground(blue);
-		toFirstb.setForeground(blue);
-		toMarkingb.setForeground(blue);
-		toRankingb.setBackground(yellow);
-		toFirstb.setBackground(yellow);
-		toMarkingb.setBackground(yellow);
+		resultl = new JLabel();
+		
+		resultl.setFont(ui.titleFont);
+		toRankingb.setFont(ui.buttonFont);
+		toMarkingb.setFont(ui.buttonFont);
+		toFirstb.setFont(ui.buttonFont);
+		resultl.setBounds(300, 300, 800, 60);
+		toRankingb.setBounds(75, 500, 250, 60);
+		toMarkingb.setBounds(450, 500, 250, 60);
+		toFirstb.setBounds(825, 500, 250, 60);
+		setBackground(ui.mainBlue);
+		resultl.setForeground(Color.WHITE);
+		toRankingb.setForeground(ui.mainBlue);
+		toFirstb.setForeground(ui.mainBlue);
+		toMarkingb.setForeground(ui.mainBlue);
+		toRankingb.setBackground(ui.mainYellow);
+		toFirstb.setBackground(ui.mainYellow);
+		toMarkingb.setBackground(ui.mainYellow);
 		
 		setLayout(null);
-		add(labelPanel);
+		add(resultl);
 		add(toRankingb);
 		add(toMarkingb);
 		add(toFirstb);
@@ -86,13 +71,12 @@ public class EndPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout card = (CardLayout)panel.getLayout();
 				card.show(panel, "p5");
+				ui.rankingPage.drawRaking(ui);
 			}
 		});//처음으로 버튼 액션리스너 등록(카드레이아웃 사용)
 
 	}
 	public void setGameResult(String userName, String category, String score) {
-		nameLabel.setText(userName);
-		categoryLabel.setText(category);
-		scoreLabel.setText(score);
+		resultl.setText(userName+"님의 "+category+" 점수는 "+score+"점 입니다!");
 	}
 }

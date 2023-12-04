@@ -1,4 +1,8 @@
 package Class;
+
+import GUI.*;
+import Class.*;
+
 import java.util.*;
 
 public class GameServer {
@@ -21,37 +25,59 @@ public class GameServer {
         rankingFourLetters = GameRepository.rankingFourLetters;
     }
 
-    public void checkLeaderboard(int score, User user, QuestionName category) {
-        List<User> leaderboard = rankingCapital;
-        int type = 0;
-        switch(category) {
-            case CAPITAL :
-                leaderboard = rankingCapital;
-                type = 0;
+    public String checkLeaderboard(UI uui) {
+
+        int score = uui.submit.score;
+        User cu = uui.gameRound.currentUser;
+        QuestionName category = uui.gameRound.currentCategory;
+
+        List<User> ranking = null;
+
+        switch (category) {
+            case CAPITAL:
+                ranking = uui.gameServer.rankingCapital;
                 break;
-            case CONNECTION :
-                leaderboard = rankingConnection;
-                type = 1;
+            case CONNECTION:
+                ranking = uui.gameServer.rankingConnection;
                 break;
-            case FOURLETTERS :
-                leaderboard = rankingFourLetters;
-                type = 2;
+            case FOURLETTERS:
+                ranking = uui.gameServer.rankingFourLetters;
                 break;
-            default : 
-                System.out.println("장비를 정지합니다");
+            default:
                 break;
         }
 
-        for(int i = 0; i < rankingSize; i++) {
-            if(score > leaderboard.get(i).score[type]) {
-                leaderboard.add(i, user);
-                leaderboard.remove(rankingSize);
+        int cat = 0;
+        switch (category) {
+            case CAPITAL:
+                cat = 0;
+                break;
+            case CONNECTION:
+                cat = 1;
+                break;
+            case FOURLETTERS:
+                cat = 2;
+                break;
+            default:
+                break;
+        }
+
+        for(int i = 0; i < ranking.size(); i++) {
+            if(ranking.get(i).score[cat] < score) {
+                ranking.add(i, cu);
                 break;
             }
         }
 
-        //write to repository
-        //GameRepository.whateverthenameis
+        StringBuilder rankingList = new StringBuilder();
+
+        for(User u : ranking) {
+            rankingList.append(u.name +"님 : " + u.score[cat] + " 점 \n\n");
+        }
+
+        GameRepository.writeRanking(cat, category, ranking);
+
+        return rankingList.toString();
     }
 
     void checkPersonalHigh(int score, User user, QuestionName category) {

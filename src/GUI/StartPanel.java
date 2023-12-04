@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class StartPanel extends JPanel {
@@ -12,35 +14,57 @@ public class StartPanel extends JPanel {
 	StartPanel(UI ui) {
 		super();
 		panel = ui.mainPanel;
-		Color blue = new Color(0x393E64);
-        Color yellow = new Color(0xF1C832);
-		setBackground(blue);
-		JTextField nametxt = new JTextField(20);
-		JButton nextb1 = new JButton("다음");
-		JLabel namel = new JLabel("이름을 입력해 주세요.");
+
+		setBackground(ui.mainBlue);
 		setLayout(null);
-		namel.setBounds(400, 200, 800, 100);
-		namel.setFont(new Font("PLAIN",Font.BOLD,35));
-		nextb1.setFont(new Font("PLAIN",Font.ITALIC,25));
-		nametxt.setFont(new Font("PLAIN",Font.ITALIC,40));
-		nametxt.setBounds(250, 300, 700, 100);
-		nextb1.setBounds(450, 500, 300, 100);
-		namel.setForeground(Color.WHITE);
-		add(namel);
-		add(nametxt);
-		add(nextb1);
-		nextb1.addActionListener(new ActionListener() {
+		// logo 넣기
+		JLabel logoLabel = new JLabel(ui.resizedIcon);
+		logoLabel.setBounds(200, 280, 300, 200);
+		// name Label 넣기
+		JLabel nameLabel = new JLabel("이름을 입력해 주세요.");
+		nameLabel.setFont(ui.titleFont);
+		nameLabel.setForeground(Color.white);
+		nameLabel.setBounds(680, 180, 400, 200);
+		// TextField
+		JTextField nameField = new JTextField(20);
+		nameField.setFont(ui.inputFont);
+		nameField.setBounds(650, 330, 350, 60);
+		// Button
+		JButton nextButton = new JButton("다음");
+		nextButton.setFont(ui.buttonFont);
+		nextButton.setBackground(ui.mainYellow);
+		nextButton.setForeground(ui.mainBlue);
+		nextButton.setBounds(650, 430, 350, 60);
+
+		add(logoLabel);
+		add(nameLabel);
+		add(nameField);
+		add(nextButton);
+
+		nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout card = (CardLayout)panel.getLayout();
-                ui.user.setName(nametxt.getText()); //입력받은 닉네임으로 User 클래스 user생성
+				CardLayout card = (CardLayout)panel.getLayout();
 
-				System.out.println("입력된 문자열 : " + nametxt.getText()); //디버깅
-				System.out.println("저장된 유저 이름 : " + ui.user.getName()); //디버깅
-
-                card.next(panel);
+				if(nameField.getText().equals("")) {
+					nameField.setText("이름을 입력해주세요");
+					nameField.setForeground(ui.mainYellow);
+				}else {
+					ui.user.setName(nameField.getText());
+					System.out.println("입력된 문자열 : " + nameField.getText()); //디버깅
+					System.out.println("저장된 유저 이름 : " + ui.user.getName()); //디버깅
+					card.next(panel);
+				}
             }
 		});
-		//nextb1이벤트처리 
+		nameField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				nameField.setText("");
+				nameField.setForeground(Color.BLACK);
+			}
+		});
+
 	}
+
 }

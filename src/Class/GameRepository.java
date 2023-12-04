@@ -1,8 +1,6 @@
 package Class;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,6 +99,31 @@ public class GameRepository {
             System.out.println(e.getMessage());
         }
         return list.size();
+    }
+    public static void writeRanking(int cat, QuestionName questionName, List<User> ranking) {
+        String path = System.getProperty("user.dir") + "/userRanking/UserRanking_" + questionName + ".csv";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+
+            writer.write("rank,user,score");
+            writer.newLine();
+
+            int cnt = 0;
+            for (User user : ranking) {
+                // 사용자 정보를 CSV 형식으로 변환
+                cnt++;
+                String csvLine = cnt+","+user.getName() + "," + user.getScore()[cat];
+
+                // CSV 파일에 쓰기
+                writer.write(csvLine);
+                writer.newLine();
+            }
+
+            System.out.println("CSV 파일이 성공적으로 생성되었습니다.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
