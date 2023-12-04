@@ -107,8 +107,6 @@ public class RankingPanel extends JPanel {
 
         rankings.setText(userList.toString());
 
-
-
 //        JButton bBack = new JButton("뒤로가기");
 //        bBack.addActionListener(new ActionListener() {
 //            @Override
@@ -139,6 +137,6 @@ public class RankingPanel extends JPanel {
 //        add(bBack);
 //        bBack.setBounds(200, 600, 300, 100);
 //        add(bMain);
-//        bMain.setBounds(700, 600, 300, 100);
+//        bMain.setBounds(700, 600, 300, 100);b
     }
 }
