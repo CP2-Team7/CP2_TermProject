@@ -1,78 +1,118 @@
 package GUI;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+import Class.*;
 
-public class Submit extends JFrame {
-    JPanel mainPanel, questionPanel, bottomPanel;
+public class Submit extends JPanel {
+    JPanel questionPanel, answerPanel, bottomPanel, panel;
     JTextField answer;
     JTextArea questionArea;
-    String questionContent;
+    List<Question> questionList;
+    int currentQuestionIndex;
+    ArrayList<String> userAnswers = new ArrayList<>();
+    UI ui;
+    public int score = 0;
 
-    public Submit() {
-        // 문제 아직 불러오지 않아 임의로 설정
-        questionContent = "\n" + "일본의 수도는?";
+    public Submit(UI ui) {
+        panel = ui.mainPanel;
+        this.ui = ui;
+        setLayout(new BorderLayout());
 
-        setTitle("QUIZZ ME!");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 800);
+        setBackground(ui.mainBlue);
 
-        mainPanel = new JPanel(new BorderLayout());
+        JLabel logoLabel = new JLabel(ui.smallIconImg);
+        logoLabel.setBounds(10, 30, 200, 100);
+        add(logoLabel);
 
         // mainPanel에 좌우 여백을 추가
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200));
+        setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200));
 
         // 중앙 부분 (문제를 표시할 패널)
         questionPanel = new JPanel(new BorderLayout());
-        questionArea = new JTextArea("Question", 30, 100);
+        questionArea = new JTextArea(30, 100);
         questionArea.setEnabled(false);
-        questionArea.append(questionContent);
-        questionArea.setFont(new Font("", 0, 50));
+        questionArea.setFont(ui.titleFont);
+        questionArea.setForeground(ui.mainBlue);
+        questionArea.setLineWrap(true);
+        questionArea.setBorder(BorderFactory.createEmptyBorder(80, 40, 20, 0));
 
-        questionArea.setEditable(false);
-        questionArea.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+        answerPanel = new JPanel();
 
         answer = new JTextField(20);
+        answer.setPreferredSize(new Dimension(350, 50));
+        answer.setFont(ui.inputFont);
+        answer.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
         answer.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    // Enter 키를 누르면 다음 버튼 누른 것과 동일한 효과
-                    System.out.println("입력 값: " + answer.getText());
-                    answer.setText("");
+                    System.out.println("입력 값:" + answer.getText());
+                    userAnswers.add(answer.getText());
+                    showNextQuestion();
+                    if (currentQuestionIndex == questionList.size() + 1) {
+                        CardLayout card = (CardLayout)panel.getLayout();
+                        card.show(panel, "p4");
+                        currentQuestionIndex = 0;
+                    }
                 }
             }
         });
 
         questionPanel.add(questionArea, BorderLayout.CENTER);
-        questionPanel.add(answer, BorderLayout.SOUTH);
+        questionPanel.add(answerPanel, BorderLayout.SOUTH);
+        answerPanel.add(answer);
 
-        mainPanel.add(questionPanel, BorderLayout.CENTER);
+        add(questionPanel, BorderLayout.CENTER);
 
         bottomPanel = new JPanel();
+        bottomPanel.setBackground(ui.mainBlue);
+
         JButton nextButton = new JButton("다음");
-        nextButton.setPreferredSize(new Dimension(200, 30));
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 다음 버튼을 누를 때 answer의 값을 터미널에 출력
-                System.out.println("입력한 값: " + answer.getText());
-                answer.setText("");
+        nextButton.setPreferredSize(new Dimension(350, 60));
+        nextButton.setBackground(ui.mainYellow);
+        nextButton.setFont(ui.buttonFont);
+        nextButton.setForeground(ui.mainBlue);
+
+        bottomPanel.add(nextButton);
+        bottomPanel.setBorder(BorderFactory.createEmptyBorder(60 , 0 , 0 , 0));
+        add(bottomPanel, BorderLayout.SOUTH);
+
+        // 다음 버튼의 ActionListener를 람다식으로 변경
+        nextButton.addActionListener(e -> {
+            System.out.println("입력 값:" + answer.getText());
+            userAnswers.add(answer.getText());
+            showNextQuestion();
+            if (currentQuestionIndex == questionList.size() + 1) {
+                CardLayout card = (CardLayout)panel.getLayout();
+                card.show(panel, "p4");
+                currentQuestionIndex = 0;
             }
         });
-        bottomPanel.add(nextButton);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        add(mainPanel);
-
-        setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new Submit();
+    // showNextQuestion 메서드를 스트림과 람다식을 사용하여 변경
+    public void showNextQuestion() {
+        currentQuestionIndex = Math.min(currentQuestionIndex + 1, questionList.size() + 1);
+
+        questionList.stream()
+                .limit(currentQuestionIndex)
+                .forEach(question -> {
+                    questionArea.setText(question.getContent());
+                    answer.setText(""); // 이전 답 초기화
+                    answer.requestFocus(); // 텍스트 필드에 포커스
+                });
+
+        // 모든 문제를 풀었을 때
+        if (currentQuestionIndex == questionList.size() + 1) {
+            answer.setText("");
+            ui.gameRound.checkAnswer(userAnswers);
+            score = ui.gameRound.checkAnswer(userAnswers);
+            ui.endPanel.setGameResult(ui.gameRound.currentUser.name, ui.gameRound.currentCategory.getName(), String.valueOf(score));
+            ui.user.setScore(ui.gameRound.currentCategory, score);
+        }
     }
 }

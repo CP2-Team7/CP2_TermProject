@@ -1,5 +1,8 @@
 package GUI;
 
+import Class.*;
+import GUI.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,61 +10,89 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
-public class CheckAnswerPage extends JFrame {
+public class CheckAnswerPage extends JPanel {
 
     private final int questionNumber = 10;
-    private JPanel CheckAnswerPanel, buttonPanel;
+    private JPanel CheckAnswerPanel, buttonPanel, panel;
+    public JLabel label;
+    Font font;
+    
 
-    // dummy data
-    List<String> question = new ArrayList<>(List.of("중국의 수도는?", "인도의 수도는?", "라오스의 수도는?", "이스라엘의 수도는?", "필리핀의 수도는?", "말레이시아의 수도는?", "요르단의 수도는?", "오스트리아의 수도는?", "러시아의 수도는?", "이탈리아의 수도는?"));
-    List<String> userAnswer = new ArrayList<>(List.of("베이징", "뉴델리", "비엔티안", "예루살렘", "마닐라", "쿠알라룸푸트", "암만", "비엔나", "모스크바", "로마"));
-    List<String> correctAnswer = new ArrayList<>(List.of("빅토리아", "베이징", "비엔티안", "예루살렘", "몰라", "쿠알라룸푸트", "암만", "몰라", "모스크바", "로마"));
-    List<Integer> scoreList = new ArrayList<>(List.of(0, 0, 1, 1, 0, 1, 1, 0, 1, 1));
+    List<Question> question;
+    List<String> userAnswer;
+    List<String> correctAnswer;
+    List<Integer> scoreList;
+    List<JLabel> questionLabelList, userAnswerLabelList, correctAnswerLabelList;
+    UI ui;
+    Color blue;
+    Color yellow;
 
-    public CheckAnswerPage() {
-        setSize(1200, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("정답 확인");
-        setLayout(new BorderLayout());
+    public CheckAnswerPage(UI ui) {
+        panel = ui.mainPanel;
+        this.ui = ui;
+        questionLabelList= new ArrayList<>();
+        userAnswerLabelList= new ArrayList<>();
+        correctAnswerLabelList= new ArrayList<>();
+
+        setLayout(null);
+        font = new Font("PLAIN", Font.PLAIN, 20);
 
         CheckAnswerPanel = new CheckAnswerPanel();
         buttonPanel = new ButtonPanel();
 
-        add(CheckAnswerPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(CheckAnswerPanel);
+        CheckAnswerPanel.setBounds(100, 30, 1000, 600);
+        add(buttonPanel);
+        buttonPanel.setBounds(100, 640, 1000, 150);
+
+        blue = new Color(0x393E64);
+        yellow = new Color(0xF1C832);
+        setBackground(blue);
 
         setVisible(true);
     }
+
     class CheckAnswerPanel extends JPanel {
         private JLabel questionTitle, userAnswerTitle, correctAnswerTitle;
-        private JLabel questionLabel, userAnswerLabel, correctAnswerLabel;
 
         public CheckAnswerPanel() {
 
-            setLayout(new GridLayout(questionNumber+1, 3));
+            setLayout(null);
+            setBackground(Color.WHITE);
 
-            questionTitle = new JLabel("문제");
-            userAnswerTitle = new JLabel("나의 답");
-            correctAnswerTitle = new JLabel("정답");
+            questionTitle = new JLabel("문제", SwingConstants.CENTER);
+            userAnswerTitle = new JLabel("나의 답", SwingConstants.CENTER);
+            correctAnswerTitle = new JLabel("정답", SwingConstants.CENTER);
 
             add(questionTitle);
+            questionTitle.setBounds(100, 10, 50, 20);
+            questionTitle.setFont(font);
             add(userAnswerTitle);
+            userAnswerTitle.setBounds(465, 10, 70, 20);
+            userAnswerTitle.setFont(font);
             add(correctAnswerTitle);
+            correctAnswerTitle.setBounds(850, 10, 50, 20);
+            correctAnswerTitle.setFont(font);
 
+            // 초기화 세팅
             for(int i = 0; i < questionNumber; i++) {
-                questionLabel = new JLabel(question.get(i));
-                ;
-                userAnswerLabel = new JLabel(userAnswer.get(i));
-                correctAnswerLabel = new JLabel(correctAnswer.get(i));
+                label = new JLabel("default", SwingConstants.CENTER);
+                label.setFont(font);
+                add(label);
+                label.setBounds(100, 65 + (50 * i), 50, 20);
+                questionLabelList.add(label);
 
-                if (scoreList.get(i) == 0) {
-                    questionLabel.setForeground(Color.red);
-                    userAnswerLabel.setForeground(Color.red);
-                    correctAnswerLabel.setForeground(Color.red);
-                }
-                add(questionLabel);
-                add(userAnswerLabel);
-                add(correctAnswerLabel);
+                label = new JLabel("default", SwingConstants.CENTER);
+                label.setFont(font);
+                add(label);
+                label.setBounds(465, 65 + (50 * i), 50, 20);
+                userAnswerLabelList.add(label);
+
+                label = new JLabel("default", SwingConstants.CENTER);
+                label.setFont(font);
+                add(label);
+                label.setBounds(850, 65 + (50 * i), 50, 20);
+                correctAnswerLabelList.add(label);
             }
         }
     }
@@ -70,32 +101,57 @@ public class CheckAnswerPage extends JFrame {
         private JButton backButton, goToFirstButton;
 
         public ButtonPanel() {
-            setLayout(new GridLayout(1, 2));
+            setLayout(null);
             backButton = new JButton("뒤로 가기");
             goToFirstButton = new JButton("처음 화면으로 가기");
+            Color yellow = new Color(0xF1C832);
+            setBackground(blue);
 
             backButton.addActionListener(this);
+            backButton.setFont(font);
+            backButton.setBackground(yellow);
             goToFirstButton.addActionListener(this);
+            goToFirstButton.setFont(font);
+            goToFirstButton.setBackground(yellow);
+
             add(backButton);
+            backButton.setBounds(100, 20, 300, 80);
             add(goToFirstButton);
+            goToFirstButton.setBounds(600, 20, 300, 80);
         }
         public void actionPerformed(ActionEvent e) {
             JButton srcButton = (JButton) e.getSource();
             String btnText = srcButton.getText();
-
+            CardLayout card = (CardLayout)panel.getLayout();
             if(btnText.equals("뒤로 가기")) {
                 // 뒤 페이지로 이동
-                System.out.println("뒤로 가기");
+                card.previous(panel);
+
             }else if(btnText.equals("처음 화면으로 가기")) {
                 // 처음 페이지로 이동
-                System.out.println("처음 화면으로 가기");
+                card.first(panel);
             }
 
         }
 
     }
+    public void setList() {
+        question = ui.gameRound.getQuestionList();
+        correctAnswer = ui.gameRound.getAnswerList();
+        scoreList = ui.gameRound.getScoreList();
+        userAnswer = ui.submit.userAnswers;
 
-    public static void main(String[] args) {
-        new CheckAnswerPage();
+        for(int i = 0; i < questionNumber; i++) {
+            questionLabelList.get(i).setText(question.get(i).content);
+            userAnswerLabelList.get(i).setText(userAnswer.get(i));
+            correctAnswerLabelList.get(i).setText(correctAnswer.get(i));
+
+            if(scoreList.get(i) == 0) {
+                questionLabelList.get(i).setForeground(Color.red);
+                userAnswerLabelList.get(i).setForeground(Color.red);
+                correctAnswerLabelList.get(i).setForeground(Color.red);
+            }
+
+        }
     }
 }
