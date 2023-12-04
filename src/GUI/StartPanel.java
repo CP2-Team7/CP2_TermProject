@@ -46,7 +46,7 @@ public class StartPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 				CardLayout card = (CardLayout)panel.getLayout();
 
-				if(nameField.getText().equals("")) {
+				if(nameField.getText().equals("") || nameField.getText().equals("이름을 입력해주세요")) {
 					nameField.setText("이름을 입력해주세요");
 					nameField.setForeground(ui.mainYellow);
 				}else {

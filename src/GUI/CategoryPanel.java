@@ -36,12 +36,16 @@ public class CategoryPanel extends JPanel {
 
         capitalb.setFont(ui.buttonFont);
         capitalb.setForeground(ui.mainBlue);
+        capitalb.setBackground(Color.white);
 
         connectionb.setFont(ui.buttonFont);
         connectionb.setForeground(ui.mainBlue);
+        connectionb.setBackground(Color.white);
 
         fourletterb.setFont(ui.buttonFont);
         fourletterb.setForeground(ui.mainBlue);
+        fourletterb.setBackground(Color.white);
+
 
         buttonPanel.setBackground(ui.mainBlue);
         buttonPanel.add(capitalb);
