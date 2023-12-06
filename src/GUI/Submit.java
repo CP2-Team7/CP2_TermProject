@@ -111,7 +111,7 @@ public class Submit extends JPanel {
             answer.setText("");
             ui.gameRound.checkAnswer(userAnswers);
             score = ui.gameRound.checkAnswer(userAnswers);
-            ui.endPanel.setGameResult(ui.gameRound.currentUser.name, ui.gameRound.currentCategory.getName(), String.valueOf(score));
+            ui.endPanel.setGameResult(ui, ui.gameRound.currentUser.name, ui.gameRound.currentCategory.getName(), String.valueOf(score));
             ui.user.setScore(ui.gameRound.currentCategory, score);
         }
     }

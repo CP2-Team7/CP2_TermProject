@@ -15,8 +15,6 @@ public class CheckAnswerPage extends JPanel {
     private final int questionNumber = 10;
     private JPanel CheckAnswerPanel, buttonPanel, panel;
     public JLabel label;
-    Font font;
-    
 
     List<Question> question;
     List<String> userAnswer;
@@ -24,8 +22,6 @@ public class CheckAnswerPage extends JPanel {
     List<Integer> scoreList;
     List<JLabel> questionLabelList, userAnswerLabelList, correctAnswerLabelList;
     UI ui;
-    Color blue;
-    Color yellow;
 
     public CheckAnswerPage(UI ui) {
         panel = ui.mainPanel;
@@ -35,19 +31,16 @@ public class CheckAnswerPage extends JPanel {
         correctAnswerLabelList= new ArrayList<>();
 
         setLayout(null);
-        font = new Font("PLAIN", Font.PLAIN, 20);
 
-        CheckAnswerPanel = new CheckAnswerPanel();
-        buttonPanel = new ButtonPanel();
+        CheckAnswerPanel = new CheckAnswerPanel(ui);
+        buttonPanel = new ButtonPanel(ui);
 
         add(CheckAnswerPanel);
         CheckAnswerPanel.setBounds(100, 30, 1000, 600);
         add(buttonPanel);
         buttonPanel.setBounds(100, 640, 1000, 150);
 
-        blue = new Color(0x393E64);
-        yellow = new Color(0xF1C832);
-        setBackground(blue);
+        setBackground(ui.mainBlue);
 
         setVisible(true);
     }
@@ -55,7 +48,7 @@ public class CheckAnswerPage extends JPanel {
     class CheckAnswerPanel extends JPanel {
         private JLabel questionTitle, userAnswerTitle, correctAnswerTitle;
 
-        public CheckAnswerPanel() {
+        public CheckAnswerPanel(UI ui) {
 
             setLayout(null);
             setBackground(Color.WHITE);
@@ -65,33 +58,33 @@ public class CheckAnswerPage extends JPanel {
             correctAnswerTitle = new JLabel("정답", SwingConstants.CENTER);
 
             add(questionTitle);
-            questionTitle.setBounds(100, 10, 50, 20);
-            questionTitle.setFont(font);
+            questionTitle.setBounds(100, 10, 100, 30);
+            questionTitle.setFont(ui.titleFont);
             add(userAnswerTitle);
-            userAnswerTitle.setBounds(465, 10, 70, 20);
-            userAnswerTitle.setFont(font);
+            userAnswerTitle.setBounds(465, 10, 100, 30);
+            userAnswerTitle.setFont(ui.titleFont);
             add(correctAnswerTitle);
-            correctAnswerTitle.setBounds(850, 10, 50, 20);
-            correctAnswerTitle.setFont(font);
+            correctAnswerTitle.setBounds(850, 10, 100, 30);
+            correctAnswerTitle.setFont(ui.titleFont);
 
             // 초기화 세팅
             for(int i = 0; i < questionNumber; i++) {
                 label = new JLabel("default", SwingConstants.CENTER);
-                label.setFont(font);
+                label.setFont(ui.buttonFont);
                 add(label);
-                label.setBounds(100, 65 + (50 * i), 50, 20);
+                label.setBounds(100, 65 + (50 * i), 200, 20);
                 questionLabelList.add(label);
 
                 label = new JLabel("default", SwingConstants.CENTER);
-                label.setFont(font);
+                label.setFont(ui.buttonFont);
                 add(label);
-                label.setBounds(465, 65 + (50 * i), 50, 20);
+                label.setBounds(465, 65 + (50 * i), 200, 20);
                 userAnswerLabelList.add(label);
 
                 label = new JLabel("default", SwingConstants.CENTER);
-                label.setFont(font);
+                label.setFont(ui.buttonFont);
                 add(label);
-                label.setBounds(850, 65 + (50 * i), 50, 20);
+                label.setBounds(850, 65 + (50 * i), 200, 20);
                 correctAnswerLabelList.add(label);
             }
         }
@@ -100,19 +93,18 @@ public class CheckAnswerPage extends JPanel {
     class ButtonPanel extends JPanel implements ActionListener {
         private JButton backButton, goToFirstButton;
 
-        public ButtonPanel() {
+        public ButtonPanel(UI ui) {
             setLayout(null);
             backButton = new JButton("뒤로 가기");
             goToFirstButton = new JButton("처음 화면으로 가기");
-            Color yellow = new Color(0xF1C832);
-            setBackground(blue);
+            setBackground(ui.mainBlue);
 
             backButton.addActionListener(this);
-            backButton.setFont(font);
-            backButton.setBackground(yellow);
+            backButton.setFont(ui.buttonFont);
+            backButton.setBackground(ui.mainYellow);
             goToFirstButton.addActionListener(this);
-            goToFirstButton.setFont(font);
-            goToFirstButton.setBackground(yellow);
+            goToFirstButton.setFont(ui.buttonFont);
+            goToFirstButton.setBackground(ui.mainYellow);
 
             add(backButton);
             backButton.setBounds(100, 20, 300, 80);

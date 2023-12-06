@@ -103,40 +103,8 @@ public class RankingPanel extends JPanel {
         categoryLabel.setText(category.getName());
 
 
-        String userList = uui.gameServer.checkLeaderboard(uui);
+        String userList = uui.gameServer.getRanking(uui);
 
         rankings.setText(userList.toString());
-
-//        JButton bBack = new JButton("뒤로가기");
-//        bBack.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            }
-//        });
-//        JButton bMain = new JButton("처음 화면으로 가기");
-//        bMain.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                CardLayout card = (CardLayout)panel.getLayout();
-//                card.show(panel, "p1");
-//            }
-//        });
-//        //폰트 및 색 지정
-//        bBack.setFont(new Font("PLAIN",Font.ITALIC,25));
-//        bMain.setFont(new Font("PLAIN",Font.ITALIC,25));
-//        bBack.setForeground(ui.mainBlue);
-//        bBack.setBackground(ui.mainYellow);
-//        bMain.setForeground(ui.mainBlue);
-//        bMain.setBackground(ui.mainYellow);
-//        rankings.setForeground(Color.GRAY);
-//        rankings.setFont(new Font("PLAIN",Font.BOLD,35));
-//
-//        //글자 나오는거 보고 rankings 사이즈 조절(좌우 여백 동일하게 맞추기)
-//        add(rankings);
-//        rankings.setBounds(250, 125, 700, 400);
-//        add(bBack);
-//        bBack.setBounds(200, 600, 300, 100);
-//        add(bMain);
-//        bMain.setBounds(700, 600, 300, 100);b
     }
 }
