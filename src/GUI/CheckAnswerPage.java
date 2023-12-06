@@ -65,13 +65,13 @@ public class CheckAnswerPage extends JPanel {
             correctAnswerTitle = new JLabel("정답", SwingConstants.CENTER);
 
             add(questionTitle);
-            questionTitle.setBounds(0, 10, 300, 20);
+            questionTitle.setBounds(0, 10, 600, 20);
             questionTitle.setFont(font);
             add(userAnswerTitle);
-            userAnswerTitle.setBounds(350, 10, 300, 20);
+            userAnswerTitle.setBounds(650, 10, 175, 20);
             userAnswerTitle.setFont(font);
             add(correctAnswerTitle);
-            correctAnswerTitle.setBounds(700, 10, 300, 20);
+            correctAnswerTitle.setBounds(825, 10, 175, 20);
             correctAnswerTitle.setFont(font);
 
             // 초기화 세팅
@@ -79,19 +79,19 @@ public class CheckAnswerPage extends JPanel {
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(font);
                 add(label);
-                label.setBounds(0, 65 + (50 * i), 300, 20);
+                label.setBounds(0, 65 + (50 * i), 600, 20);
                 questionLabelList.add(label);
 
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(font);
                 add(label);
-                label.setBounds(350, 65 + (50 * i), 300, 20);
+                label.setBounds(650, 65 + (50 * i), 175, 20);
                 userAnswerLabelList.add(label);
 
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(font);
                 add(label);
-                label.setBounds(700, 65 + (50 * i), 300, 20);
+                label.setBounds(825, 65 + (50 * i), 175, 20);
                 correctAnswerLabelList.add(label);
             }
         }
