@@ -58,33 +58,37 @@ public class CheckAnswerPage extends JPanel {
             correctAnswerTitle = new JLabel("정답", SwingConstants.CENTER);
 
             add(questionTitle);
-            questionTitle.setBounds(100, 10, 100, 30);
-            questionTitle.setFont(ui.titleFont);
-            add(userAnswerTitle);
-            userAnswerTitle.setBounds(465, 10, 100, 30);
-            userAnswerTitle.setFont(ui.titleFont);
-            add(correctAnswerTitle);
-            correctAnswerTitle.setBounds(850, 10, 100, 30);
-            correctAnswerTitle.setFont(ui.titleFont);
 
+            questionTitle.setBounds(0, 10, 600, 20);
+            questionTitle.setFont(ui.buttonFont);
+            add(userAnswerTitle);
+            userAnswerTitle.setBounds(650, 10, 175, 20);
+            userAnswerTitle.setFont(ui.buttonFont);
+            add(correctAnswerTitle);
+            correctAnswerTitle.setBounds(825, 10, 175, 20);
+            correctAnswerTitle.setFont(ui.buttonFont);
             // 초기화 세팅
             for(int i = 0; i < questionNumber; i++) {
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(ui.buttonFont);
                 add(label);
-                label.setBounds(100, 65 + (50 * i), 200, 20);
+
+                label.setBounds(0, 65 + (50 * i), 600, 20);
+
                 questionLabelList.add(label);
 
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(ui.buttonFont);
                 add(label);
-                label.setBounds(465, 65 + (50 * i), 200, 20);
+
+                label.setBounds(650, 65 + (50 * i), 175, 20);
                 userAnswerLabelList.add(label);
 
                 label = new JLabel("default", SwingConstants.CENTER);
                 label.setFont(ui.buttonFont);
                 add(label);
-                label.setBounds(850, 65 + (50 * i), 200, 20);
+
+                label.setBounds(825, 65 + (50 * i), 175, 20);
                 correctAnswerLabelList.add(label);
             }
         }
@@ -117,7 +121,7 @@ public class CheckAnswerPage extends JPanel {
             CardLayout card = (CardLayout)panel.getLayout();
             if(btnText.equals("뒤로 가기")) {
                 // 뒤 페이지로 이동
-                card.previous(panel);
+                card.show(panel, "p4");
 
             }else if(btnText.equals("처음 화면으로 가기")) {
                 // 처음 페이지로 이동

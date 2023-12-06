@@ -75,9 +75,9 @@ public class CategoryPanel extends JPanel {
                 }
                 else {
                 	selectcatl.setForeground(Color.WHITE);
-                	fourletterb.setBackground(ui.mainYellow);
-        			connectionb.setBackground(ui.mainYellow);
-        			capitalb.setBackground(ui.mainYellow);
+                	fourletterb.setBackground(Color.WHITE);
+        			connectionb.setBackground(Color.WHITE);
+        			capitalb.setBackground(Color.WHITE);
                 	QuestionName qn = QuestionName.valueOf(setcategory);
                     ui.gameRound.initGameRound(qn,ui.user);
                     System.out.println(setcategory); //디버깅
