@@ -87,6 +87,7 @@ public class Submit extends JPanel {
             userAnswers.add(answer.getText());
             showNextQuestion();
             if (currentQuestionIndex == questionList.size() + 1) {
+                System.out.println("유저 정답 : " + userAnswers.toString()); //디버깅
                 CardLayout card = (CardLayout)panel.getLayout();
                 card.show(panel, "p4");
                 currentQuestionIndex = 0;
@@ -111,8 +112,8 @@ public class Submit extends JPanel {
             answer.setText("");
             ui.gameRound.checkAnswer(userAnswers);
             score = ui.gameRound.checkAnswer(userAnswers);
-            ui.endPanel.setGameResult(ui.gameRound.currentUser.name, ui.gameRound.currentCategory.getName(), String.valueOf(score));
             ui.user.setScore(ui.gameRound.currentCategory, score);
+            ui.endPanel.setGameResult(ui, ui.gameRound.currentUser.name, ui.gameRound.currentCategory.getName(), String.valueOf(score));
         }
     }
 }

@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import Class.*;
 
@@ -85,6 +86,7 @@ public class CategoryPanel extends JPanel {
 
                     // Submit 클래스의 questionList 초기화
                     ui.submit.questionList = ui.gameRound.questionList;
+                    ui.submit.userAnswers.clear();
                     ui.submit.showNextQuestion();
 
                     card.show(panel, "p3");

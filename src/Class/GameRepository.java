@@ -61,7 +61,7 @@ public class GameRepository {
         return list.size();
     }
 
-    public void setUserRanking() {
+    public static void setUserRanking() {
         System.out.println("유저 랭킹 세팅을 시작합니다.");
         for(QuestionName questionName : QuestionName.values()) {
             int size = setUserRankingList(questionName);
@@ -69,7 +69,7 @@ public class GameRepository {
         }
     }
 
-    private int setUserRankingList(QuestionName questionName) {
+    private static int setUserRankingList(QuestionName questionName) {
         String path = System.getProperty("user.dir") + "/userRanking/UserRanking_" + questionName + ".csv";
         BufferedReader br;
         List<User> list = new ArrayList<>();

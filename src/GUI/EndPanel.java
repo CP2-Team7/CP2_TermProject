@@ -76,7 +76,9 @@ public class EndPanel extends JPanel {
 		});//처음으로 버튼 액션리스너 등록(카드레이아웃 사용)
 
 	}
-	public void setGameResult(String userName, String category, String score) {
+	public void setGameResult(UI uui, String userName, String category, String score) {
 		resultl.setText(userName+"님의 "+category+" 점수는 "+score+"점 입니다!");
+		//랭킹 업데이트
+		uui.gameServer.checkLeaderboard(uui);
 	}
 }

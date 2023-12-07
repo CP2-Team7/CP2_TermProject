@@ -25,7 +25,47 @@ public class GameServer {
         rankingFourLetters = GameRepository.rankingFourLetters;
     }
 
-    public String checkLeaderboard(UI uui) {
+    public String getRanking(UI uui) {
+        StringBuilder rankingList = new StringBuilder();
+        List<User> ranking = null;
+
+        switch (uui.gameRound.currentCategory) {
+            case CAPITAL:
+                ranking = uui.gameServer.rankingCapital;
+                break;
+            case CONNECTION:
+                ranking = uui.gameServer.rankingConnection;
+                break;
+            case FOURLETTERS:
+                ranking = uui.gameServer.rankingFourLetters;
+                break;
+            default:
+                break;
+        }
+        int cat = 0;
+        switch (uui.gameRound.currentCategory) {
+            case CAPITAL:
+                cat = 0;
+                break;
+            case CONNECTION:
+                cat = 1;
+                break;
+            case FOURLETTERS:
+                cat = 2;
+                break;
+            default:
+                break;
+        }
+
+        for(User u : ranking) {
+            rankingList.append(u.name +"님 : " + u.score[cat] + " 점 \n\n");
+        }
+
+        return rankingList.toString();
+    }
+
+
+    public void checkLeaderboard(UI uui) {
 
         int score = uui.submit.score;
         User cu = uui.gameRound.currentUser;
@@ -62,22 +102,8 @@ public class GameServer {
                 break;
         }
 
-        for(int i = 0; i < ranking.size(); i++) {
-            if(ranking.get(i).score[cat] < score) {
-                ranking.add(i, cu);
-                break;
-            }
-        }
-
-        StringBuilder rankingList = new StringBuilder();
-
-        for(User u : ranking) {
-            rankingList.append(u.name +"님 : " + u.score[cat] + " 점 \n\n");
-        }
-
-        GameRepository.writeRanking(cat, category, ranking);
-
-        return rankingList.toString();
+        updateRankingList(ranking, cu, cat);
+        GameRepository.writeRanking(cat, uui.gameRound.currentCategory, ranking);
     }
 
     void checkPersonalHigh(int score, User user, QuestionName category) {
@@ -99,6 +125,52 @@ public class GameServer {
 
         if(score > ogScore) {
             ogScore = score;
+        }
+    }
+    private static void updateRankingList(List<User> ranking, User newUser, int cat) {
+
+        if(newUser.score[cat] == 0)
+            return;
+
+        for(User u : ranking) {
+            System.out.println(u.name + u.score[cat]);
+        }
+
+        // 이미 리스트에 있는 이름인 경우
+        for (User existingUser : ranking) {
+            if (existingUser.name.equals(newUser.name)) {
+                System.out.println("a");
+                System.out.println(newUser.score[cat]);
+                System.out.println(existingUser.score[cat]);
+                ranking.sort(Comparator.comparingInt((User u) -> u.score[cat]).reversed());
+                if (newUser.score[cat] > existingUser.score[cat]) {
+                    System.out.println("b");
+                    existingUser.score[cat] = newUser.score[cat];
+                    ranking.sort(Comparator.comparingInt((User u) -> u.score[cat]).reversed());
+                }
+                return; // 이미 업데이트 했으므로 종료
+            }
+        }
+
+        // 리스트에 없는 이름이고, 리스트 사이즈가 10이 넘지 않는 경우
+        if (ranking.size() < 10) {
+            ranking.add(newUser);
+            ranking.sort(Comparator.comparingInt((User u) -> u.score[cat]).reversed());
+        } else {
+            // 리스트에 없는 이름이고, 리스트 사이즈가 10이 넘는 경우
+            System.out.println("here");
+            int minScore = ranking.get(ranking.size() - 1).score[cat];
+            System.out.println(newUser.score[cat]);
+            System.out.println(minScore);
+            if (newUser.score[cat] > minScore) {
+                ranking.removeIf(user -> user.score[cat] == minScore); // 최하 점수를 가진 User 제거
+                ranking.add(newUser);
+                ranking.sort(Comparator.comparingInt((User u) -> u.score[cat]).reversed());
+            }
+        }
+
+        for(User u : ranking) {
+            System.out.println(u.name + u.score[cat]);
         }
     }
 }
