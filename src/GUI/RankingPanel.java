@@ -26,6 +26,7 @@ public class RankingPanel extends JPanel {
     public RankingPanel(UI ui) {
         super();
         panel = ui.mainPanel;
+
         setLayout(new BorderLayout());
         setBackground(ui.mainBlue);
 
@@ -101,7 +102,6 @@ public class RankingPanel extends JPanel {
 
         QuestionName category = uui.gameRound.currentCategory;
         categoryLabel.setText(category.getName());
-
 
         String userList = uui.gameServer.getRanking(uui);
 

@@ -128,11 +128,25 @@ public class GameServer {
         }
     }
     private static void updateRankingList(List<User> ranking, User newUser, int cat) {
+
+        if(newUser.score[cat] == 0)
+            return;
+
+        for(User u : ranking) {
+            System.out.println(u.name + u.score[cat]);
+        }
+
         // 이미 리스트에 있는 이름인 경우
         for (User existingUser : ranking) {
             if (existingUser.name.equals(newUser.name)) {
+                System.out.println("a");
+                System.out.println(newUser.score[cat]);
+                System.out.println(existingUser.score[cat]);
+                ranking.sort(Comparator.comparingInt((User u) -> u.score[cat]).reversed());
                 if (newUser.score[cat] > existingUser.score[cat]) {
+                    System.out.println("b");
                     existingUser.score[cat] = newUser.score[cat];
+                    ranking.sort(Comparator.comparingInt((User u) -> u.score[cat]).reversed());
                 }
                 return; // 이미 업데이트 했으므로 종료
             }
@@ -144,7 +158,10 @@ public class GameServer {
             ranking.sort(Comparator.comparingInt((User u) -> u.score[cat]).reversed());
         } else {
             // 리스트에 없는 이름이고, 리스트 사이즈가 10이 넘는 경우
+            System.out.println("here");
             int minScore = ranking.get(ranking.size() - 1).score[cat];
+            System.out.println(newUser.score[cat]);
+            System.out.println(minScore);
             if (newUser.score[cat] > minScore) {
                 ranking.removeIf(user -> user.score[cat] == minScore); // 최하 점수를 가진 User 제거
                 ranking.add(newUser);
@@ -152,6 +169,8 @@ public class GameServer {
             }
         }
 
-
+        for(User u : ranking) {
+            System.out.println(u.name + u.score[cat]);
+        }
     }
 }
